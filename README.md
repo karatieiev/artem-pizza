@@ -2,9 +2,18 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Progress:
+Repository created
+Added pizza configurator (without styles)
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run lint:fix`
+
+Launches the ESLint to fix errors and make the code prettier.\
+Airbnb rules are used [https://github.com/airbnb/javascript](https://github.com/airbnb/javascript)
 
 ### `npm start`
 

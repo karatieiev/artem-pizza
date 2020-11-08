@@ -1,10 +1,8 @@
+import React from "react"
+import Configurator from "./Configurator"
 
-function App() {
-  return (
-    <div>
-      There will be online pizza store
-    </div>
-  );
+export const App = () => {
+  return <Configurator />
 }
 
-export default App;
+export default App
