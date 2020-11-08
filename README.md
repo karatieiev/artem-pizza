@@ -3,8 +3,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Progress:
-Repository created
-Added pizza configurator (without styles)
+Repository created.\
+Added pizza configurator (without styles).
 
 ## Available Scripts
 
