@@ -34,7 +34,6 @@ GroupRadio.propTypes = {
       option: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
-      checked: PropTypes.bool.isRequired,
     })
   ).isRequired,
   option: PropTypes.string.isRequired,

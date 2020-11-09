@@ -2,22 +2,19 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const GroupCheckbox = ({ menu, option, caption, onChange }) => {
-  const [selection, setSelection] = React.useState(menu)
+  const [selection, setSelection] = React.useState([])
 
   const handleOnChange = (id) => {
     setSelection((selectionCopy) => {
-      selectionCopy.map((current) => {
-        const item = current
-        item.checked = item.id === id ? !item.checked : item.checked
-        return item
-      })
+      const index = selectionCopy.findIndex((item) => item.id === id)
+      if (index === -1) {
+        selectionCopy.push(menu.find((item) => item.id === id))
+      } else {
+        selectionCopy.splice(index, 1)
+      }
       return selectionCopy
     })
-
-    onChange(
-      option,
-      selection.filter((item) => item.checked)
-    )
+    onChange(option, selection)
   }
 
   return (
@@ -45,7 +42,6 @@ GroupCheckbox.propTypes = {
       option: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
-      checked: PropTypes.bool.isRequired,
     })
   ).isRequired,
   option: PropTypes.string.isRequired,

@@ -4,27 +4,23 @@ import GroupCheckbox from "./GroupCheckbox"
 import OrderInfo from "./OrderInfo"
 
 const Configurator = () => {
-  const [order, setOrder] = React.useState([])
-
-  const [showOrderInfo, setShowOrderInfo] = React.useState(false)
-
   const menu = [
-    { id: 0, option: "size", name: "30см", price: 200, checked: false },
-    { id: 1, option: "size", name: "35см", price: 250, checked: false },
-    { id: 2, option: "dough", name: "пышное", price: 0, checked: false },
-    { id: 3, option: "dough", name: "тонкое", price: 0, checked: false },
-    { id: 4, option: "sauce", name: "томатный", price: 0, checked: false },
-    { id: 5, option: "sauce", name: "белый", price: 0, checked: false },
-    { id: 6, option: "sauce", name: "острый", price: 0, checked: false },
-    { id: 7, option: "cheese", name: "моцарелла", price: 29, checked: false },
-    { id: 8, option: "cheese", name: "чеддер", price: 29, checked: false },
-    { id: 9, option: "cheese", name: "дор блю", price: 29, checked: false },
-    { id: 10, option: "vegies", name: "помидоры", price: 29, checked: false },
-    { id: 11, option: "vegies", name: "грибы", price: 29, checked: false },
-    { id: 12, option: "vegies", name: "перец", price: 29, checked: false },
-    { id: 13, option: "meat", name: "бекон", price: 29, checked: false },
-    { id: 14, option: "meat", name: "пепперони", price: 29, checked: false },
-    { id: 15, option: "meat", name: "ветчина", price: 29, checked: false },
+    { id: 0, option: "size", name: "30см", price: 200 },
+    { id: 1, option: "size", name: "35см", price: 250 },
+    { id: 2, option: "dough", name: "пышное", price: 0 },
+    { id: 3, option: "dough", name: "тонкое", price: 0 },
+    { id: 4, option: "sauce", name: "томатный", price: 0 },
+    { id: 5, option: "sauce", name: "белый", price: 0 },
+    { id: 6, option: "sauce", name: "острый", price: 0 },
+    { id: 7, option: "cheese", name: "моцарелла", price: 29 },
+    { id: 8, option: "cheese", name: "чеддер", price: 29 },
+    { id: 9, option: "cheese", name: "дор блю", price: 29 },
+    { id: 10, option: "vegies", name: "помидоры", price: 29 },
+    { id: 11, option: "vegies", name: "грибы", price: 29 },
+    { id: 12, option: "vegies", name: "перец", price: 29 },
+    { id: 13, option: "meat", name: "бекон", price: 29 },
+    { id: 14, option: "meat", name: "пепперони", price: 29 },
+    { id: 15, option: "meat", name: "ветчина", price: 29 },
   ]
 
   const menuSize = menu.filter((item) => item.option === "size")
@@ -34,11 +30,14 @@ const Configurator = () => {
   const menuVegies = menu.filter((item) => item.option === "vegies")
   const menuMeat = menu.filter((item) => item.option === "meat")
 
+  const [order, setOrder] = React.useState([])
+  const [showOrderInfo, setShowOrderInfo] = React.useState(false)
+
   const handleOnGroupChange = (option, selection) => {
-    setOrder((orderArg) => {
-      const arr = orderArg.filter((item) => item.option !== option)
-      selection.map((item) => arr.push(item))
-      return arr
+    setOrder((orderCopy) => {
+      const orderNew = orderCopy.filter((item) => item.option !== option)
+      selection.map((item) => orderNew.push(item))
+      return orderNew
     })
   }
 
@@ -46,10 +45,6 @@ const Configurator = () => {
     // console.log(JSON.stringify(order, null, 2))
     setShowOrderInfo((value) => !value)
   }
-
-  React.useEffect(() => {
-    setOrder(() => menu.filter((item) => item.checked))
-  }, [])
 
   return (
     <>
