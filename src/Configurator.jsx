@@ -46,8 +46,10 @@ const Configurator = () => {
     setShowOrderInfo((value) => !value)
   }
 
+  if (showOrderInfo) return <OrderInfo order={order} />
+
   return (
-    <>
+    <form>
       <GroupRadio
         caption="Размер"
         menu={menuSize}
@@ -88,8 +90,7 @@ const Configurator = () => {
       <button type="button" onClick={handleOnButtonClick}>
         {`Заказать ${order.reduce((sum, current) => sum + current.price, 0)}р`}
       </button>
-      {showOrderInfo ? <OrderInfo order={order} /> : null}
-    </>
+    </form>
   )
 }
 
