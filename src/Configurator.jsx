@@ -2,94 +2,91 @@ import React from "react"
 import GroupRadio from "./GroupRadio"
 import GroupCheckbox from "./GroupCheckbox"
 import OrderInfo from "./OrderInfo"
+import calculatePrice from "./utils"
 
 const Configurator = () => {
-  const menu = [
-    { id: 0, option: "size", name: "30см", price: 200 },
-    { id: 1, option: "size", name: "35см", price: 250 },
-    { id: 2, option: "dough", name: "пышное", price: 0 },
-    { id: 3, option: "dough", name: "тонкое", price: 0 },
-    { id: 4, option: "sauce", name: "томатный", price: 0 },
-    { id: 5, option: "sauce", name: "белый", price: 0 },
-    { id: 6, option: "sauce", name: "острый", price: 0 },
-    { id: 7, option: "cheese", name: "моцарелла", price: 29 },
-    { id: 8, option: "cheese", name: "чеддер", price: 29 },
-    { id: 9, option: "cheese", name: "дор блю", price: 29 },
-    { id: 10, option: "vegies", name: "помидоры", price: 29 },
-    { id: 11, option: "vegies", name: "грибы", price: 29 },
-    { id: 12, option: "vegies", name: "перец", price: 29 },
-    { id: 13, option: "meat", name: "бекон", price: 29 },
-    { id: 14, option: "meat", name: "пепперони", price: 29 },
-    { id: 15, option: "meat", name: "ветчина", price: 29 },
-  ]
-
-  const menuSize = menu.filter((item) => item.option === "size")
-  const menuDough = menu.filter((item) => item.option === "dough")
-  const menuSauce = menu.filter((item) => item.option === "sauce")
-  const menuCheese = menu.filter((item) => item.option === "cheese")
-  const menuVegies = menu.filter((item) => item.option === "vegies")
-  const menuMeat = menu.filter((item) => item.option === "meat")
-
-  const [order, setOrder] = React.useState([])
+  const [menu, setMenu] = React.useState({
+    size: [
+      { id: 0, name: "30см", price: 200, checked: true },
+      { id: 1, name: "35см", price: 250, checked: false },
+    ],
+    dough: [
+      { id: 2, name: "тонкое", price: 0, checked: true },
+      { id: 3, name: "пышное", price: 0, checked: false },
+    ],
+    sauce: [
+      { id: 4, name: "томатный", price: 0, checked: true },
+      { id: 5, name: "белый", price: 0, checked: false },
+      { id: 6, name: "острый", price: 0, checked: false },
+    ],
+    cheese: [
+      { id: 7, name: "моцарелла", price: 29, checked: false },
+      { id: 8, name: "чеддер", price: 29, checked: false },
+      { id: 9, name: "дор блю", price: 29, checked: false },
+    ],
+    vegies: [
+      { id: 10, name: "помидоры", price: 29, checked: false },
+      { id: 11, name: "грибы", price: 29, checked: false },
+      { id: 12, name: "перец", price: 29, checked: false },
+    ],
+    meat: [
+      { id: 13, name: "бекон", price: 29, checked: false },
+      { id: 14, name: "пепперони", price: 29, checked: false },
+      { id: 15, name: "ветчина", price: 29, checked: false },
+    ],
+  })
   const [showOrderInfo, setShowOrderInfo] = React.useState(false)
 
-  const handleOnGroupChange = (option, selection) => {
-    setOrder((orderCopy) => {
-      const orderNew = orderCopy.filter((item) => item.option !== option)
-      selection.map((item) => orderNew.push(item))
-      return orderNew
-    })
+  const handleGroupChange = (option, selection) => {
+    setMenu((o) => ({ ...o, [option]: selection }))
   }
 
-  const handleOnButtonClick = () => {
-    // console.log(JSON.stringify(order, null, 2))
+  const handleSubmitForm = () => {
     setShowOrderInfo((value) => !value)
   }
 
-  if (showOrderInfo) return <OrderInfo order={order} />
+  if (showOrderInfo) return <OrderInfo order={menu} />
 
   return (
-    <form>
+    <form onSubmit={handleSubmitForm}>
       <GroupRadio
         caption="Размер"
-        menu={menuSize}
+        menu={menu.size}
         option="size"
-        onChange={handleOnGroupChange}
+        onChange={handleGroupChange}
       />
       <GroupRadio
         caption="Тесто"
-        menu={menuDough}
+        menu={menu.dough}
         option="dough"
-        onChange={handleOnGroupChange}
+        onChange={handleGroupChange}
       />
       <GroupRadio
         caption="Соус"
-        menu={menuSauce}
+        menu={menu.sauce}
         option="sauce"
-        onChange={handleOnGroupChange}
+        onChange={handleGroupChange}
       />
       <GroupCheckbox
         caption="Сыр"
-        menu={menuCheese}
+        menu={menu.cheese}
         option="cheese"
-        onChange={handleOnGroupChange}
+        onChange={handleGroupChange}
       />
       <GroupCheckbox
         caption="Овощи"
-        menu={menuVegies}
+        menu={menu.vegies}
         option="vegies"
-        onChange={handleOnGroupChange}
+        onChange={handleGroupChange}
       />
       <GroupCheckbox
         caption="Мясо"
-        menu={menuMeat}
+        menu={menu.meat}
         option="meat"
-        onChange={handleOnGroupChange}
+        onChange={handleGroupChange}
       />
       <br />
-      <button type="button" onClick={handleOnButtonClick}>
-        {`Заказать ${order.reduce((sum, current) => sum + current.price, 0)}р`}
-      </button>
+      <button type="submit">{`Заказать ${calculatePrice(menu)}р`}</button>
     </form>
   )
 }

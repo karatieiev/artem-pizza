@@ -2,10 +2,12 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const GroupRadio = ({ menu, option, caption, onChange }) => {
-  const handleOnChange = (id) => {
+  const handleChange = (id) => {
     onChange(
       option,
-      menu.filter((item) => item.id === id)
+      menu.map((item) => {
+        return { ...item, checked: item.id === id }
+      })
     )
   }
 
@@ -16,9 +18,11 @@ const GroupRadio = ({ menu, option, caption, onChange }) => {
         <>
           <input
             type="radio"
+            key={item.id}
             id={item.id}
             name={option}
-            onChange={() => handleOnChange(item.id)}
+            checked={item.checked}
+            onChange={() => handleChange(item.id)}
           />
           <label htmlFor={item.id}>{item.name}</label>
         </>
