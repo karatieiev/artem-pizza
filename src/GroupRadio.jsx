@@ -5,9 +5,7 @@ const GroupRadio = ({ menu, option, caption, onChange }) => {
   const handleChange = (id) => {
     onChange(
       option,
-      menu.map((item) => {
-        return { ...item, checked: item.id === id }
-      })
+      menu.map((item) => ({ ...item, checked: item.id === id }))
     )
   }
 
