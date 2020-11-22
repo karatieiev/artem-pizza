@@ -32,14 +32,7 @@ const GroupRadio = ({ menu, option, caption, onChange }) => {
 }
 
 GroupRadio.propTypes = {
-  menu: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      option: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    })
-  ).isRequired,
+  menu: PropTypes.object.isRequired,
   option: PropTypes.string.isRequired,
   caption: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
