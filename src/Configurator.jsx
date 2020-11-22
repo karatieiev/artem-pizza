@@ -1,7 +1,6 @@
 import React from "react"
 import GroupRadio from "./GroupRadio"
 import GroupCheckbox from "./GroupCheckbox"
-import OrderInfo from "./OrderInfo"
 import calculatePrice from "./utils"
 
 const Configurator = () => {
@@ -30,22 +29,17 @@ const Configurator = () => {
       { id: 12, name: "перец", price: 29, checked: false },
     ],
     meat: [
-      { id: 13, name: "бекон", price: 29, checked: false },
+      { id: 13, name: "бекон", price: 29, checked: true },
       { id: 14, name: "пепперони", price: 29, checked: false },
       { id: 15, name: "ветчина", price: 29, checked: false },
     ],
   })
-  const [showOrderInfo, setShowOrderInfo] = React.useState(false)
 
   const handleGroupChange = (option, selection) => {
     setMenu((o) => ({ ...o, [option]: selection }))
   }
 
-  const handleSubmitForm = () => {
-    setShowOrderInfo((value) => !value)
-  }
-
-  if (showOrderInfo) return <OrderInfo order={menu} />
+  const handleSubmitForm = () => {}
 
   return (
     <form onSubmit={handleSubmitForm}>
