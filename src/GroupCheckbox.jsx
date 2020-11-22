@@ -32,13 +32,15 @@ const GroupCheckbox = ({ menu, option, caption, onChange }) => {
 }
 
 GroupCheckbox.propTypes = {
-  menu: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      option: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    })
+  menu: PropTypes.objectOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        checked: PropTypes.bool.isRequired,
+      })
+    )
   ).isRequired,
   option: PropTypes.string.isRequired,
   caption: PropTypes.string.isRequired,
