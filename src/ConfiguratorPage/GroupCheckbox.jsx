@@ -1,11 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const GroupRadio = ({ menu, option, caption, onChange }) => {
+export const GroupCheckbox = ({ menu, option, caption, onChange }) => {
   const handleChange = (id) => {
     onChange(
       option,
-      menu.map((item) => ({ ...item, checked: item.id === id }))
+      menu.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
     )
   }
 
@@ -15,7 +17,7 @@ const GroupRadio = ({ menu, option, caption, onChange }) => {
       {menu.map((item) => (
         <>
           <input
-            type="radio"
+            type="checkbox"
             key={item.id}
             id={item.id}
             name={option}
@@ -29,20 +31,16 @@ const GroupRadio = ({ menu, option, caption, onChange }) => {
   )
 }
 
-GroupRadio.propTypes = {
-  menu: PropTypes.objectOf(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        checked: PropTypes.bool.isRequired,
-      })
-    )
+GroupCheckbox.propTypes = {
+  menu: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      checked: PropTypes.bool.isRequired,
+    })
   ).isRequired,
   option: PropTypes.string.isRequired,
   caption: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 }
-
-export default GroupRadio
