@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-export const GroupRadio = ({ menu, option, caption, onChange }) => {
+export const RadioGroup = ({ menu, option, caption, onChange }) => {
   const handleChange = (id) => {
     onChange(
       option,
@@ -29,7 +29,7 @@ export const GroupRadio = ({ menu, option, caption, onChange }) => {
   )
 }
 
-GroupRadio.propTypes = {
+RadioGroup.propTypes = {
   menu: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

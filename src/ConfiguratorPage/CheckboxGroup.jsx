@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-export const GroupCheckbox = ({ menu, option, caption, onChange }) => {
+export const CheckboxGroup = ({ menu, option, caption, onChange }) => {
   const handleChange = (id) => {
     onChange(
       option,
@@ -31,7 +31,7 @@ export const GroupCheckbox = ({ menu, option, caption, onChange }) => {
   )
 }
 
-GroupCheckbox.propTypes = {
+CheckboxGroup.propTypes = {
   menu: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

@@ -1,7 +1,7 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
-import { GroupRadio } from "./GroupRadio"
-import { GroupCheckbox } from "./GroupCheckbox"
+import { RadioGroup } from "./RadioGroup"
+import { CheckboxGroup } from "./CheckboxGroup"
 import { calculatePrice } from "./calculatePrice"
 import { pizzaDescription } from "./pizzaDescription"
 import { usePizzaContext } from "../sharedComponents/PizzaContext"
@@ -57,37 +57,37 @@ export const Configurator = () => {
     <>
       <h3>Соберите пиццу</h3>
       <form onSubmit={handleSubmitForm}>
-        <GroupRadio
+        <RadioGroup
           caption="Размер"
           menu={menu.size}
           option="size"
           onChange={handleGroupChange}
         />
-        <GroupRadio
+        <RadioGroup
           caption="Тесто"
           menu={menu.dough}
           option="dough"
           onChange={handleGroupChange}
         />
-        <GroupRadio
+        <RadioGroup
           caption="Соус"
           menu={menu.sauce}
           option="sauce"
           onChange={handleGroupChange}
         />
-        <GroupCheckbox
+        <CheckboxGroup
           caption="Сыр"
           menu={menu.cheese}
           option="cheese"
           onChange={handleGroupChange}
         />
-        <GroupCheckbox
+        <CheckboxGroup
           caption="Овощи"
           menu={menu.vegies}
           option="vegies"
           onChange={handleGroupChange}
         />
-        <GroupCheckbox
+        <CheckboxGroup
           caption="Мясо"
           menu={menu.meat}
           option="meat"

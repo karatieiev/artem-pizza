@@ -5,7 +5,9 @@ import { useAuthContext } from "./AuthContext"
 
 export const PrivateRoute = ({ children, redirect, path }) => {
   const { auth } = useAuthContext()
-  if (auth) return <Route path={path}>{children}</Route>
+  if (auth) {
+    return <Route path={path}>{children}</Route>
+  }
   return <Redirect to={redirect} />
 }
 
