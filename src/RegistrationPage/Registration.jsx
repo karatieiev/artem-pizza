@@ -1,44 +1,24 @@
 import React from "react"
+import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 
 export const Registration = () => {
-  const [login, setLogin] = React.useState("")
-  const [password, setPassword] = React.useState("")
+  const { register, handleSubmit } = useForm()
 
-  const handleLoginChange = (event) => {
-    setLogin(event.target.value)
-  }
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault()
-  }
+  const onSubmit = () => {}
 
   return (
     <>
       <h3>Регистрация</h3>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="login">
           Логин
-          <input
-            id="login"
-            type="text"
-            value={login}
-            onChange={handleLoginChange}
-          />
+          <input id="login" type="text" name="login" ref={register} />
         </label>
         <br />
         <label htmlFor="password">
           Пароль
-          <input
-            id="password"
-            type="text"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+          <input id="password" type="text" name="password" ref={register} />
         </label>
         <br />
         <br />
