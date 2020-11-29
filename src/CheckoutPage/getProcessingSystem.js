@@ -12,7 +12,7 @@ export const getProcessingSystem = (cardNumber) => {
       case "5":
         return "MasterCard"
       default:
-        return ""
+        return "Unknown"
     }
   }
   return ""
