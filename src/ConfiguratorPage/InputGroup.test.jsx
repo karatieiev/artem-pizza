@@ -3,7 +3,7 @@ import { render } from "@testing-library/react"
 import { InputGroup } from "./InputGroup"
 
 describe("InputGroup", () => {
-  it("render correctly", () => {
+  it("renders correctly", () => {
     const menu = [
       {
         id: 0,

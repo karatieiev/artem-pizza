@@ -24,7 +24,7 @@ const SetContext = () => {
 }
 
 describe("Preview", () => {
-  it("render correctly", () => {
+  it("renders correctly", () => {
     const { getByText } = render(
       <PizzaProvider>
         <SetContext />
