@@ -1,23 +1,14 @@
 import React from "react"
+import { useForm } from "react-hook-form"
 import { Link, useHistory } from "react-router-dom"
 import { useAuthContext } from "../sharedComponents/AuthContext"
 
 export const Login = () => {
-  const [login, setLogin] = React.useState("")
-  const [password, setPassword] = React.useState("")
   const { logIn } = useAuthContext()
   const history = useHistory()
+  const { register, handleSubmit } = useForm()
 
-  const handleLoginChange = (event) => {
-    setLogin(event.target.value)
-  }
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault()
+  const onSubmit = () => {
     logIn()
     history.push("/")
   }
@@ -25,25 +16,15 @@ export const Login = () => {
   return (
     <>
       <h3>Аутентификация</h3>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="login">
           Логин
-          <input
-            id="login"
-            type="text"
-            value={login}
-            onChange={handleLoginChange}
-          />
+          <input id="login" type="text" name="login" ref={register} />
         </label>
         <br />
         <label htmlFor="password">
           Пароль
-          <input
-            id="password"
-            type="text"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+          <input id="password" type="text" name="password" ref={register} />
         </label>
         <br />
         <br />
