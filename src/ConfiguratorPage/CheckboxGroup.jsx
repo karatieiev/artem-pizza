@@ -15,17 +15,16 @@ export const CheckboxGroup = ({ menu, option, caption, onChange }) => {
     <>
       <div>{caption}</div>
       {menu.map((item) => (
-        <>
+        <label htmlFor={item.id} key={item.id}>
           <input
             type="checkbox"
-            key={item.id}
             id={item.id}
             name={option}
             checked={item.checked}
             onChange={() => handleChange(item.id)}
           />
-          <label htmlFor={item.id}>{item.name}</label>
-        </>
+          {item.name}
+        </label>
       ))}
     </>
   )
