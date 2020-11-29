@@ -53,7 +53,7 @@ export const Checkout = () => {
             placeholder="0000 0000 0000 0000"
             onChange={handleChange}
           />
-          {` ${getProcessingSystem(formData.card)}`}
+          {` ${getProcessingSystem(formData.card.substring(0, 19))}`}
         </label>
         <br />
         <br />

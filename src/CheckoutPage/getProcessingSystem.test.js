@@ -17,5 +17,4 @@ describe("getProcessingSystem", () => {
     const system = getProcessingSystem("fdfdf 3434")
     expect(system).toEqual("")
   })
-
 })
