@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 export const PizzaContext = React.createContext({})
 
 export const PizzaProvider = ({ children }) => {
-  const [pizza, setPizza] = React.useState({})
+  const [pizza, setPizza] = React.useState([])
 
   return (
     <PizzaContext.Provider value={{ pizza, setPizza }}>

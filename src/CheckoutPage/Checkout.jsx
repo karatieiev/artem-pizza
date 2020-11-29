@@ -15,10 +15,13 @@ export const Checkout = () => {
   return (
     <>
       <h3>Оформление заказа</h3>
-      <Preview pizza={pizza} />
+      <Preview />
       <br />
       <form onSubmit={handleFormSubmit}>
-        <button type="submit">{`Оплатить ${pizza.price} р`}</button>
+        <button type="submit">{`Оплатить ${pizza.reduce(
+          (sum, current) => sum + current.price,
+          0
+        )} р`}</button>
       </form>
     </>
   )

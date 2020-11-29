@@ -1,4 +1,4 @@
-export const calculatePrice = (menu, selection) => {
+export const makePizza = (menu, selection) => {
   const selectedId = []
 
   Object.keys(selection).forEach((key) => {
@@ -16,9 +16,5 @@ export const calculatePrice = (menu, selection) => {
     }
   })
 
-  return menu.reduce(
-    (sum, current) =>
-      selectedId.includes(current.id) ? sum + current.price : sum,
-    0
-  )
+  return menu.filter((item) => selectedId.includes(item.id))
 }

@@ -1,55 +1,49 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
-import { RadioGroup } from "./RadioGroup"
-import { CheckboxGroup } from "./CheckboxGroup"
+import { useForm } from "react-hook-form"
+import { makePizza } from "./makePizza"
 import { calculatePrice } from "./calculatePrice"
-import { pizzaDescription } from "./pizzaDescription"
 import { usePizzaContext } from "../sharedComponents/PizzaContext"
+import { InputGroup } from "./InputGroup"
+
+const menu = [
+  { id: 0, option: "size", name: "30см", price: 200 },
+  { id: 1, option: "size", name: "35см", price: 250 },
+  { id: 2, option: "dough", name: "тонкое", price: 0 },
+  { id: 3, option: "dough", name: "пышное", price: 0 },
+  { id: 4, option: "sauce", name: "томатный", price: 0 },
+  { id: 5, option: "sauce", name: "белый", price: 0 },
+  { id: 6, option: "sauce", name: "острый", price: 0 },
+  { id: 7, option: "cheese", name: "моцарелла", price: 29 },
+  { id: 8, option: "cheese", name: "чеддер", price: 29 },
+  { id: 9, option: "cheese", name: "дор блю", price: 29 },
+  { id: 10, option: "vegies", name: "помидоры", price: 29 },
+  { id: 11, option: "vegies", name: "грибы", price: 29 },
+  { id: 12, option: "vegies", name: "перец", price: 29 },
+  { id: 13, option: "meat", name: "бекон", price: 29 },
+  { id: 14, option: "meat", name: "пепперони", price: 29 },
+  { id: 15, option: "meat", name: "ветчина", price: 29 },
+]
 
 export const Configurator = () => {
   const { setPizza } = usePizzaContext()
   const history = useHistory()
-  const [menu, setMenu] = React.useState({
-    size: [
-      { id: 0, name: "30см", price: 200, checked: true },
-      { id: 1, name: "35см", price: 250, checked: false },
-    ],
-    dough: [
-      { id: 2, name: "тонкое", price: 0, checked: true },
-      { id: 3, name: "пышное", price: 0, checked: false },
-    ],
-    sauce: [
-      { id: 4, name: "томатный", price: 0, checked: true },
-      { id: 5, name: "белый", price: 0, checked: false },
-      { id: 6, name: "острый", price: 0, checked: false },
-    ],
-    cheese: [
-      { id: 7, name: "моцарелла", price: 29, checked: false },
-      { id: 8, name: "чеддер", price: 29, checked: false },
-      { id: 9, name: "дор блю", price: 29, checked: false },
-    ],
-    vegies: [
-      { id: 10, name: "помидоры", price: 29, checked: false },
-      { id: 11, name: "грибы", price: 29, checked: false },
-      { id: 12, name: "перец", price: 29, checked: false },
-    ],
-    meat: [
-      { id: 13, name: "бекон", price: 29, checked: false },
-      { id: 14, name: "пепперони", price: 29, checked: false },
-      { id: 15, name: "ветчина", price: 29, checked: false },
-    ],
+  const { register, watch } = useForm({
+    defaultValues: {
+      size: "0",
+      dough: "2",
+      sauce: "4",
+      cheese: [],
+      vegies: [],
+      meat: [],
+    },
   })
 
-  const handleGroupChange = (option, selection) => {
-    setMenu((o) => ({ ...o, [option]: selection }))
-  }
+  const selection = watch()
 
   const handleSubmitForm = (event) => {
     event.preventDefault()
-    setPizza({
-      description: pizzaDescription(menu),
-      price: calculatePrice(menu),
-    })
+    setPizza(makePizza(menu, selection))
     history.push("/checkout")
   }
 
@@ -57,45 +51,54 @@ export const Configurator = () => {
     <>
       <h3>Соберите пиццу</h3>
       <form onSubmit={handleSubmitForm}>
-        <RadioGroup
+        <InputGroup
+          type="radio"
           caption="Размер"
-          menu={menu.size}
+          menu={menu.filter((item) => item.option === "size")}
           option="size"
-          onChange={handleGroupChange}
+          register={register}
         />
-        <RadioGroup
+        <InputGroup
+          type="radio"
           caption="Тесто"
-          menu={menu.dough}
+          menu={menu.filter((item) => item.option === "dough")}
           option="dough"
-          onChange={handleGroupChange}
+          register={register}
         />
-        <RadioGroup
+        <InputGroup
+          type="radio"
           caption="Соус"
-          menu={menu.sauce}
+          menu={menu.filter((item) => item.option === "sauce")}
           option="sauce"
-          onChange={handleGroupChange}
+          register={register}
         />
-        <CheckboxGroup
+        <InputGroup
+          type="checkbox"
           caption="Сыр"
-          menu={menu.cheese}
+          menu={menu.filter((item) => item.option === "cheese")}
           option="cheese"
-          onChange={handleGroupChange}
+          register={register}
         />
-        <CheckboxGroup
+        <InputGroup
+          type="checkbox"
           caption="Овощи"
-          menu={menu.vegies}
+          menu={menu.filter((item) => item.option === "vegies")}
           option="vegies"
-          onChange={handleGroupChange}
+          register={register}
         />
-        <CheckboxGroup
+        <InputGroup
+          type="checkbox"
           caption="Мясо"
-          menu={menu.meat}
+          menu={menu.filter((item) => item.option === "meat")}
           option="meat"
-          onChange={handleGroupChange}
+          register={register}
         />
         <br />
         <br />
-        <button type="submit">{`Заказать ${calculatePrice(menu)}р`}</button>
+        <button type="submit">{`Заказать ${calculatePrice(
+          menu,
+          selection
+        )}р`}</button>
       </form>
     </>
   )
