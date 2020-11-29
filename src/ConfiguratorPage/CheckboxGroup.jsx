@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const GroupCheckbox = ({ menu, option, caption, onChange }) => {
+export const CheckboxGroup = ({ menu, option, caption, onChange }) => {
   const handleChange = (id) => {
     onChange(
       option,
@@ -15,36 +15,31 @@ const GroupCheckbox = ({ menu, option, caption, onChange }) => {
     <>
       <div>{caption}</div>
       {menu.map((item) => (
-        <>
+        <label htmlFor={item.id} key={item.id}>
           <input
             type="checkbox"
-            key={item.id}
             id={item.id}
             name={option}
             checked={item.checked}
             onChange={() => handleChange(item.id)}
           />
-          <label htmlFor={item.id}>{item.name}</label>
-        </>
+          {item.name}
+        </label>
       ))}
     </>
   )
 }
 
-GroupCheckbox.propTypes = {
-  menu: PropTypes.objectOf(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        checked: PropTypes.bool.isRequired,
-      })
-    )
+CheckboxGroup.propTypes = {
+  menu: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      checked: PropTypes.bool.isRequired,
+    })
   ).isRequired,
   option: PropTypes.string.isRequired,
   caption: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 }
-
-export default GroupCheckbox

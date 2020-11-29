@@ -1,13 +1,4 @@
-export default function calculatePrice(order) {
-  let price = 0
-  Object.values(order).forEach((item) =>
-    item.forEach((i) => {
-      price += i.checked ? i.price : 0
-    })
-  )
-  return price
-}
-export function orderDescription(order) {
+export const pizzaDescription = (order) => {
   let desc = `Размер ${order.size.filter((item) => item.checked)[0].name}`
   desc =
     desc +
