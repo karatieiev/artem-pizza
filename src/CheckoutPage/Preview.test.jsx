@@ -19,7 +19,7 @@ const SetContext = () => {
       { id: 12, option: "vegies", name: "перец", price: 29 },
       { id: 13, option: "meat", name: "бекон", price: 29 },
     ])
-  }, [])
+  }, [setPizza])
   return null
 }
 
