@@ -1,14 +1,15 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 import { useHistory } from "react-router-dom"
+import PropTypes from "prop-types"
 import { usePizzaContext } from "../sharedComponents/PizzaContext"
 import { getProcessingSystem } from "./getProcessingSystem"
 import { Preview } from "./Preview"
 
-export const Checkout = () => {
+export const Checkout = ({ formSubmit }) => {
   const { pizza } = usePizzaContext()
   const history = useHistory()
-  const { register, watch } = useForm({
+  const { register, watch, handleSubmit } = useForm({
     defaultValues: {
       card: "",
     },
@@ -16,8 +17,10 @@ export const Checkout = () => {
 
   const formData = watch()
 
-  const onSubmit = (event) => {
-    event.preventDefault()
+  const onSubmit = (data) => {
+    if (formSubmit) {
+      formSubmit(data)
+    }
     history.push("/order")
   }
 
@@ -42,7 +45,7 @@ export const Checkout = () => {
       <h3>Оформление заказа</h3>
       <Preview />
       <br />
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="card">
           Номер карты:{" "}
           <input
@@ -53,8 +56,8 @@ export const Checkout = () => {
             placeholder="0000 0000 0000 0000"
             onChange={handleChange}
           />
-          {` ${getProcessingSystem(formData.card.substring(0, 19))}`}
         </label>
+        <span>{` ${getProcessingSystem(formData.card.substring(0, 19))}`}</span>
         <br />
         <br />
         <button type="submit">{`Оплатить ${pizza.reduce(
@@ -64,4 +67,12 @@ export const Checkout = () => {
       </form>
     </>
   )
+}
+
+Checkout.propTypes = {
+  formSubmit: PropTypes.func,
+}
+
+Checkout.defaultProps = {
+  formSubmit: null,
 }
