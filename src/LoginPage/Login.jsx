@@ -13,7 +13,6 @@ export const Login = ({ submitForm }) => {
     if (submitForm) {
       submitForm(data)
     }
-    console.log(data)
     logIn()
     history.push("/")
   }

@@ -1,11 +1,16 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
 
-export const Registration = () => {
+export const Registration = ({ formSubmit }) => {
   const { register, handleSubmit } = useForm()
 
-  const onSubmit = () => {}
+  const onSubmit = (data) => {
+    if (formSubmit) {
+      formSubmit(data)
+    }
+  }
 
   return (
     <>
@@ -22,10 +27,20 @@ export const Registration = () => {
         </label>
         <br />
         <br />
-        <button type="submit">Регистрация</button>
+        <button data-testid="btnSubmit" type="submit">
+          Регистрация
+        </button>
       </form>
       <br />
       <Link to="/login">Аутентификация</Link>
     </>
   )
+}
+
+Registration.propTypes = {
+  formSubmit: PropTypes.func,
+}
+
+Registration.defaultProps = {
+  formSubmit: null,
 }
