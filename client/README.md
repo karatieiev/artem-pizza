@@ -4,7 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Progress:
 Repository created.\
-Added pizza configurator (without styles).
+Pizza configurator added (without styles).\
+Routing implemented.\
+Pages Home, Login, Registration, Checkout, Order added.\
+Tests added.\
+React-hook-form implemented.\
+
 
 ## Available Scripts
 
