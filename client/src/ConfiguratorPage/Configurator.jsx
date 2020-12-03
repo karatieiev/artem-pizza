@@ -82,7 +82,9 @@ export const Configurator = () => {
         <InputGroup
           type="checkbox"
           caption="Овощи"
-          ingredients={ingredients.filter((item) => item.category === "vegies")}
+          ingredients={ingredients.filter(
+            (item) => item.category === "veggies"
+          )}
           category="vegies"
           register={register}
         />

@@ -10,14 +10,14 @@ const SetContext = () => {
   const { setPizza } = usePizzaContext()
   React.useEffect(() => {
     setPizza([
-      { id: 1, option: "size", name: "35см", price: 250 },
-      { id: 3, option: "dough", name: "пышное", price: 0 },
-      { id: 6, option: "sauce", name: "острый", price: 0 },
-      { id: 8, option: "cheese", name: "чеддер", price: 29 },
-      { id: 10, option: "vegies", name: "помидоры", price: 29 },
-      { id: 11, option: "vegies", name: "грибы", price: 29 },
-      { id: 12, option: "vegies", name: "перец", price: 29 },
-      { id: 13, option: "meat", name: "бекон", price: 29 },
+      { slug: "1", category: "size", name: "35см", price: 250 },
+      { slug: "3", category: "dough", name: "пышное", price: 0 },
+      { slug: "6", category: "sauce", name: "острый", price: 0 },
+      { slug: 8, category: "cheese", name: "чеддер", price: 29 },
+      { slug: 10, category: "veggies", name: "помидоры", price: 29 },
+      { slug: 11, category: "veggies", name: "грибы", price: 29 },
+      { slug: 12, category: "veggies", name: "перец", price: 29 },
+      { slug: 13, category: "meat", name: "бекон", price: 29 },
     ])
   }, [setPizza])
   return null
@@ -31,11 +31,11 @@ describe("Preview", () => {
         <Preview />
       </PizzaProvider>
     )
-    expect(getByText("Размер: 35см")).toBeInTheDocument()
-    expect(getByText("Тесто: пышное")).toBeInTheDocument()
-    expect(getByText("Соус: острый")).toBeInTheDocument()
-    expect(getByText("Сыр: чеддер")).toBeInTheDocument()
-    expect(getByText("Овощи: помидоры, грибы, перец")).toBeInTheDocument()
-    expect(getByText("Мясо: бекон")).toBeInTheDocument()
+    expect(getByText("Размер: *35см*")).toBeInTheDocument()
+    expect(getByText("Тесто: *пышное*")).toBeInTheDocument()
+    expect(getByText("Соус: *острый*")).toBeInTheDocument()
+    expect(getByText("Сыр: *чеддер*")).toBeInTheDocument()
+    expect(getByText("Овощи: *помидоры*грибы*перец*")).toBeInTheDocument()
+    expect(getByText("Мясо: *бекон*")).toBeInTheDocument()
   })
 })

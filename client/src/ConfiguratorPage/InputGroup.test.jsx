@@ -4,10 +4,10 @@ import { InputGroup } from "./InputGroup"
 
 describe("InputGroup", () => {
   it("renders correctly", () => {
-    const menu = [
+    const ingredients = [
       {
-        id: 0,
-        option: "option",
+        slug: "0",
+        category: "category",
         name: "name",
         price: 100,
       },
@@ -16,8 +16,8 @@ describe("InputGroup", () => {
       <InputGroup
         type="checkbox"
         caption="caption"
-        option="option"
-        menu={menu}
+        category="category"
+        ingredients={ingredients}
         register={() => null}
       />
     )
