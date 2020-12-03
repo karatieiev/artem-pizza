@@ -1,20 +1,20 @@
-export const makePizza = (menu, selection) => {
-  const selectedId = []
+export const makePizza = (ingredients, selection) => {
+  const selectedSlugs = []
 
   Object.keys(selection).forEach((key) => {
     switch (key) {
       case "size":
       case "dough":
       case "sauce":
-        selectedId.push(+selection[key])
+        selectedSlugs.push(selection[key])
         break
       default:
-        selection[key].forEach((id) => {
-          selectedId.push(+id)
+        selection[key].forEach((slug) => {
+          selectedSlugs.push(slug)
         })
         break
     }
   })
 
-  return menu.filter((item) => selectedId.includes(item.id))
+  return ingredients.filter((item) => selectedSlugs.includes(item.slug))
 }

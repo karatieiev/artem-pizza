@@ -49,12 +49,4 @@ describe("Configurator", () => {
       expect(getByText("Заказать 511р")).toBeInTheDocument()
     })
   })
-  describe("on order submit", () => {
-    // it("shows order information component", () => {
-    //   const { getByText } = render(<Configurator />)
-    //   const element = getByText("Заказать 200р")
-    //   fireEvent.click(element)
-    //   expect(getByText("Описание заказа")).toBeInTheDocument()
-    // })
-  })
 })
