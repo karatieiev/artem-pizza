@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form"
 import { makePizza } from "./makePizza"
 import { calculatePrice } from "./calculatePrice"
 import { usePizzaContext } from "../sharedComponents/PizzaContext"
-import { InputGroup } from "./InputGroup"
+import { RadioGroup } from "./RadioGroup"
+import { CheckboxGroup } from "./CheckboxGroup"
 
 const ingredients = [
   { slug: "0", category: "size", name: "30см", price: 200 },
@@ -51,36 +52,31 @@ export const Configurator = () => {
     <>
       <h3>Соберите пиццу</h3>
       <form onSubmit={handleSubmitForm}>
-        <InputGroup
-          type="radio"
+        <RadioGroup
           caption="Размер"
           ingredients={ingredients.filter((item) => item.category === "size")}
           category="size"
           register={register}
         />
-        <InputGroup
-          type="radio"
+        <RadioGroup
           caption="Тесто"
           ingredients={ingredients.filter((item) => item.category === "dough")}
           category="dough"
           register={register}
         />
-        <InputGroup
-          type="radio"
+        <RadioGroup
           caption="Соус"
           ingredients={ingredients.filter((item) => item.category === "sauce")}
           category="sauce"
           register={register}
         />
-        <InputGroup
-          type="checkbox"
+        <CheckboxGroup
           caption="Сыр"
           ingredients={ingredients.filter((item) => item.category === "cheese")}
           category="cheese"
           register={register}
         />
-        <InputGroup
-          type="checkbox"
+        <CheckboxGroup
           caption="Овощи"
           ingredients={ingredients.filter(
             (item) => item.category === "veggies"
@@ -88,8 +84,7 @@ export const Configurator = () => {
           category="vegies"
           register={register}
         />
-        <InputGroup
-          type="checkbox"
+        <CheckboxGroup
           caption="Мясо"
           ingredients={ingredients.filter((item) => item.category === "meat")}
           category="meat"

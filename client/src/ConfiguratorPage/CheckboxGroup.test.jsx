@@ -1,6 +1,6 @@
 import React from "react"
 import { render } from "@testing-library/react"
-import { InputGroup } from "./InputGroup"
+import { CheckboxGroup } from "./CheckboxGroup"
 
 describe("InputGroup", () => {
   it("renders correctly", () => {
@@ -13,8 +13,7 @@ describe("InputGroup", () => {
       },
     ]
     const { getByText } = render(
-      <InputGroup
-        type="checkbox"
+      <CheckboxGroup
         caption="caption"
         category="category"
         ingredients={ingredients}

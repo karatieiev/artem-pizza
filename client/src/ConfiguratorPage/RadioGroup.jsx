@@ -1,20 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-export const InputGroup = ({
-  ingredients,
-  category,
-  caption,
-  register,
-  type,
-}) => {
+export const RadioGroup = ({ ingredients, category, caption, register }) => {
   return (
     <>
       <div>{caption}</div>
       {ingredients.map((item) => (
         <label htmlFor={item.slug} key={item.slug}>
           <input
-            type={type}
+            type="radio"
             id={item.slug}
             name={category}
             ref={register}
@@ -27,7 +21,7 @@ export const InputGroup = ({
   )
 }
 
-InputGroup.propTypes = {
+RadioGroup.propTypes = {
   ingredients: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
@@ -38,5 +32,4 @@ InputGroup.propTypes = {
   category: PropTypes.string.isRequired,
   caption: PropTypes.string.isRequired,
   register: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired,
 }
