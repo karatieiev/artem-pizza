@@ -18,7 +18,7 @@ export const calculatePrice = (ingredients, selection) => {
 
   return ingredients.reduce(
     (sum, current) =>
-      selectedSlugs.includes(current.slug) ? sum + current.price : sum,
+      selectedSlugs.includes(current.slug) ? sum + +current.price : sum,
     0
   )
 }

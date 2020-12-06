@@ -61,7 +61,7 @@ export const Checkout = ({ formSubmit }) => {
         <br />
         <br />
         <button type="submit">{`Оплатить ${pizza.reduce(
-          (sum, current) => sum + current.price,
+          (sum, current) => sum + +current.price,
           0
         )} р`}</button>
       </form>

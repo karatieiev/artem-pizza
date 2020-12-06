@@ -22,7 +22,7 @@ export const Preview = () => {
       )}
       {meat[0] && <div>Мясо: *{meat.map((item) => `${item.name}*`)}</div>}
       <div>
-        Сумма заказа: {pizza.reduce((sum, current) => sum + current.price, 0)}р
+        Сумма заказа: {pizza.reduce((sum, current) => sum + +current.price, 0)}р
       </div>
     </>
   )
