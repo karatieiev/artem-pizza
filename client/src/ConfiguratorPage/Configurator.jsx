@@ -7,7 +7,7 @@ import { calculatePrice } from "./calculatePrice"
 import { usePizzaContext } from "../sharedComponents/PizzaContext"
 import { RadioGroup } from "./RadioGroup"
 import { CheckboxGroup } from "./CheckboxGroup"
-import { getIngredients } from "../api/getIngredients"
+import { getIngredients } from "../api/ingredients"
 
 // const ingredients = [
 //   { slug: "0", category: "size", name: "30см", price: 200 },
