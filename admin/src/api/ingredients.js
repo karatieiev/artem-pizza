@@ -18,7 +18,7 @@ export const putIngredient = (id, formData) => {
 }
 
 export const postIngredient = (formData) => {
-  return fetch(`${process.env.REACT_APP_API_SERVER}/ingredients/${id}`, {
+  return fetch(`${process.env.REACT_APP_API_SERVER}/ingredients`, {
     method: "POST",
     body: formData,
   }).then((result) => result.json())

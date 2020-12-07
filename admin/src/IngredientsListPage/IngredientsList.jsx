@@ -43,9 +43,9 @@ export const IngredientsList = () => {
           </li>
         ))}
       </ul>
-      <br />
-      <br />
-      <button type="button" onClick={handleAddNew}>Add</button>
+      <button type="button" onClick={handleAddNew}>
+        Add
+      </button>
     </>
   )
 }
