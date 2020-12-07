@@ -17,6 +17,13 @@ export const putIngredient = (id, formData) => {
   }).then((result) => result.json())
 }
 
+export const postIngredient = (formData) => {
+  return fetch(`${process.env.REACT_APP_API_SERVER}/ingredients/${id}`, {
+    method: "POST",
+    body: formData,
+  }).then((result) => result.json())
+}
+
 export const deleteIngredient = (id) => {
   return fetch(`${process.env.REACT_APP_API_SERVER}/ingredients/${id}`, {
     method: "DELETE",

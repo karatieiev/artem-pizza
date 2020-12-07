@@ -15,6 +15,10 @@ export const IngredientsList = () => {
     history.push(`/ingredients/${id}`)
   }
 
+  const handleAddNew = () => {
+    history.push("/new-ingredient")
+  }
+
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -39,6 +43,9 @@ export const IngredientsList = () => {
           </li>
         ))}
       </ul>
+      <br />
+      <br />
+      <button type="button" onClick={handleAddNew}>Add</button>
     </>
   )
 }

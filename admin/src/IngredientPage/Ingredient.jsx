@@ -11,7 +11,6 @@ export const Ingredient = () => {
   const { register, handleSubmit } = useForm()
 
   const onSubmit = (fData) => {
-    // console.log(JSON.stringify(formData, null, 2))
     const formData = new FormData()
     formData.append("name", fData.name)
     formData.append("slug", fData.slug)
