@@ -2,7 +2,11 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import { useQuery } from "react-query"
 import { useHistory, useParams } from "react-router-dom"
-import { getIngredient, putIngredient } from "../api/ingredients"
+import {
+  getIngredient,
+  putIngredient,
+  deleteIngredient,
+} from "../api/ingredients"
 
 export const Ingredient = () => {
   const history = useHistory()
@@ -24,6 +28,12 @@ export const Ingredient = () => {
 
   const handleCancel = () => {
     history.push("/")
+  }
+
+  const handleDelete = () => {
+    deleteIngredient(id).then(() => {
+      history.push("/")
+    })
   }
 
   if (isLoading) {
@@ -94,7 +104,9 @@ export const Ingredient = () => {
         <br />
         <br />
         <button type="submit">Save</button>
-        <button type="button">Delete</button>
+        <button type="button" onClick={handleDelete}>
+          Delete
+        </button>
         <button type="button" onClick={handleCancel}>
           Cancel
         </button>
