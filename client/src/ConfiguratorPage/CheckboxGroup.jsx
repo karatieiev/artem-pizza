@@ -26,7 +26,7 @@ CheckboxGroup.propTypes = {
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
+      price: PropTypes.string.isRequired,
     })
   ).isRequired,
   category: PropTypes.string.isRequired,

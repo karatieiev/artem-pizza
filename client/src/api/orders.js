@@ -4,9 +4,10 @@ export const getOrders = () => {
   )
 }
 
-export const postOrders = (data) => {
+export const postOrder = (data) => {
   return fetch(`${process.env.REACT_APP_API_SERVER}/orders`, {
     method: "POST",
-    body: data,
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" },
   }).then((result) => result.json())
 }

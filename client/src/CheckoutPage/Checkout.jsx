@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import PropTypes from "prop-types"
 import { usePizzaContext } from "../sharedComponents/PizzaContext"
 import { getProcessingSystem } from "./getProcessingSystem"
+import { postOrder } from "../api/orders"
 import { Preview } from "./Preview"
 
 export const Checkout = ({ formSubmit }) => {
@@ -21,7 +22,14 @@ export const Checkout = ({ formSubmit }) => {
     if (formSubmit) {
       formSubmit(data)
     }
-    history.push("/order")
+    postOrder({
+      ingredients: pizza,
+      address: data.address,
+      name: data.name,
+      card_number: data.card,
+    }).then(() => {
+      history.push("/order")
+    })
   }
 
   const normalizeCardNumber = (value) => {
@@ -46,6 +54,15 @@ export const Checkout = ({ formSubmit }) => {
       <Preview />
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="name">
+          Имя: <input id="name" type="text" name="name" ref={register} />
+        </label>
+        <br />
+        <label htmlFor="address">
+          Адрес:{" "}
+          <input id="address" type="text" name="address" ref={register} />
+        </label>
+        <br />
         <label htmlFor="card">
           Номер карты:{" "}
           <input
@@ -57,6 +74,7 @@ export const Checkout = ({ formSubmit }) => {
             onChange={handleChange}
           />
         </label>
+        <br />
         <span>{` ${getProcessingSystem(formData.card.substring(0, 19))}`}</span>
         <br />
         <br />
