@@ -13,8 +13,6 @@ export const OrderList = () => {
     return <div>Error: {error.message}</div>
   }
 
-  console.log(JSON.stringify(data))
-
   return (
     <>
       <h3>Список заказов</h3>
