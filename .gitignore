@@ -11,8 +11,6 @@
 # misc
 /admin/.eslintcache
 /client/.eslintcache
-/admin/.env
-/client/.env
 
 /admin/debug.log
 /client/debug.log
