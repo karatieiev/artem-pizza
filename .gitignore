@@ -1,0 +1,22 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/client/node_modules
+/admin/node_modules
+
+# production
+/client/build
+/admin/build
+
+# misc
+/admin/.eslintcache
+/client/.eslintcache
+/admin/.env
+/client/.env
+
+/admin/debug.log
+/client/debug.log
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
