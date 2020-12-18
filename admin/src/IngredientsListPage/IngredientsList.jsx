@@ -11,11 +11,11 @@ export const IngredientsList = () => {
     getIngredientsList
   )
 
-  const handleClick = (id) => {
+  const handleIngredientClick = (id) => {
     history.push(`/ingredients/${id}`)
   }
 
-  const handleAddNew = () => {
+  const handleAddNewIngredient = () => {
     history.push("/new-ingredient")
   }
 
@@ -35,7 +35,7 @@ export const IngredientsList = () => {
           <li
             key={uuidv1()}
             onClick={() => {
-              handleClick(item.slug)
+              handleIngredientClick(item.slug)
             }}
             role="presentation"
           >
@@ -43,7 +43,7 @@ export const IngredientsList = () => {
           </li>
         ))}
       </ul>
-      <button type="button" onClick={handleAddNew}>
+      <button type="button" onClick={handleAddNewIngredient}>
         Add
       </button>
     </>
