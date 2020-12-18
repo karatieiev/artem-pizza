@@ -16,7 +16,7 @@ export const Ingredient = () => {
   const { register, handleSubmit } = useForm()
 
   const onSubmit = (formData) => {
-    putIngredient(formData.slug, buildFormData(formData)).then(() => {
+    putIngredient(id, buildFormData(formData)).then(() => {
       history.push("/")
     })
   }
