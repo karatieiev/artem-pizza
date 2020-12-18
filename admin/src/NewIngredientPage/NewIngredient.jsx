@@ -2,19 +2,14 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import { useHistory } from "react-router-dom"
 import { postIngredient } from "../api/ingredients"
+import { buildFormData } from "../api/utils"
 
 export const NewIngredient = () => {
   const history = useHistory()
   const { register, handleSubmit } = useForm()
 
-  const onSubmit = (fData) => {
-    const formData = new FormData()
-    formData.append("name", fData.name)
-    formData.append("slug", fData.slug)
-    formData.append("category", fData.category)
-    formData.append("price", fData.price)
-    formData.append("image", fData.image[0])
-    postIngredient(formData).then(() => {
+  const onSubmit = (formData) => {
+    postIngredient(buildFormData(formData)).then(() => {
       history.push("/")
     })
   }

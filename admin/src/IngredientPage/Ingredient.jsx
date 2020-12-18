@@ -7,6 +7,7 @@ import {
   putIngredient,
   deleteIngredient,
 } from "../api/ingredients"
+import { buildFormData } from "../api/utils"
 
 export const Ingredient = () => {
   const history = useHistory()
@@ -14,14 +15,8 @@ export const Ingredient = () => {
   const { isLoading, isError, error, data } = useQuery(id, getIngredient)
   const { register, handleSubmit } = useForm()
 
-  const onSubmit = (fData) => {
-    const formData = new FormData()
-    formData.append("name", fData.name)
-    formData.append("slug", fData.slug)
-    formData.append("category", fData.category)
-    formData.append("price", fData.price)
-    formData.append("image", fData.image[0])
-    putIngredient(fData.slug, formData).then(() => {
+  const onSubmit = (formData) => {
+    putIngredient(formData.slug, buildFormData(formData)).then(() => {
       history.push("/")
     })
   }
