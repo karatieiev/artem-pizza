@@ -1,16 +1,16 @@
 export const calculatePrice = (ingredients, selection) => {
-  const selectedSlugs = []
+  const selectedIDs = []
 
   Object.keys(selection).forEach((key) => {
     switch (key) {
       case "size":
       case "dough":
       case "sauce":
-        selectedSlugs.push(selection[key])
+        selectedIDs.push(selection[key])
         break
       default:
-        selection[key].forEach((slug) => {
-          selectedSlugs.push(slug)
+        selection[key].forEach((id) => {
+          selectedIDs.push(id)
         })
         break
     }
@@ -18,7 +18,7 @@ export const calculatePrice = (ingredients, selection) => {
 
   return ingredients.reduce(
     (sum, current) =>
-      selectedSlugs.includes(current.slug) ? sum + +current.price : sum,
+      selectedIDs.includes(current.id) ? sum + +current.price : sum,
     0
   )
 }

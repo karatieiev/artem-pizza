@@ -1,6 +1,5 @@
 import React from "react"
 import { useQuery } from "react-query"
-import { v1 as uuidv1 } from "uuid"
 import { useHistory } from "react-router-dom"
 import { getIngredientsList } from "../api/ingredients"
 
@@ -33,9 +32,9 @@ export const IngredientsList = () => {
       <ul>
         {data.map((item) => (
           <li
-            key={uuidv1()}
+            key={item.id}
             onClick={() => {
-              handleIngredientClick(item.slug)
+              handleIngredientClick(item.id)
             }}
             role="presentation"
           >
