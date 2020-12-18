@@ -6,13 +6,13 @@ export const CheckboxGroup = ({ ingredients, category, caption, register }) => {
     <>
       <div>{caption}</div>
       {ingredients.map((item) => (
-        <label htmlFor={item.slug} key={item.slug}>
+        <label htmlFor={item.id} key={item.id}>
           <input
             type="checkbox"
-            id={item.slug}
+            id={item.id}
             name={category}
             ref={register}
-            value={item.slug}
+            value={item.id}
           />
           {item.name}
         </label>
@@ -24,9 +24,8 @@ export const CheckboxGroup = ({ ingredients, category, caption, register }) => {
 CheckboxGroup.propTypes = {
   ingredients: PropTypes.arrayOf(
     PropTypes.shape({
-      slug: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
     })
   ).isRequired,
   category: PropTypes.string.isRequired,
