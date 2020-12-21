@@ -1,101 +1,98 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { useQuery } from "react-query"
-import { makePizza } from "./makePizza"
-import { calculatePrice } from "./calculatePrice"
-import { usePizzaContext } from "../sharedComponents/PizzaContext"
+import { useDispatch, useSelector } from "react-redux"
 import { RadioGroup } from "./RadioGroup"
 import { CheckboxGroup } from "./CheckboxGroup"
-import { getIngredients } from "../api/ingredients"
-
-// const ingredients = [
-//   { slug: "0", category: "size", name: "30см", price: 200 },
-//   { slug: "1", category: "size", name: "35см", price: 250 },
-//   { slug: "2", category: "dough", name: "тонкое", price: 0 },
-//   { slug: "3", category: "dough", name: "пышное", price: 0 },
-//   { slug: "4", category: "sauce", name: "томатный", price: 0 },
-//   { slug: "5", category: "sauce", name: "белый", price: 0 },
-//   { slug: "6", category: "sauce", name: "острый", price: 0 },
-//   { slug: "7", category: "cheese", name: "моцарелла", price: 29 },
-//   { slug: "8", category: "cheese", name: "чеддер", price: 29 },
-//   { slug: "9", category: "cheese", name: "дор блю", price: 29 },
-//   { slug: "10", category: "veggies", name: "помидоры", price: 29 },
-//   { slug: "11", category: "veggies", name: "грибы", price: 29 },
-//   { slug: "12", category: "veggies", name: "перец", price: 29 },
-//   { slug: "13", category: "meat", name: "бекон", price: 29 },
-//   { slug: "14", category: "meat", name: "пепперони", price: 29 },
-//   { slug: "15", category: "meat", name: "ветчина", price: 29 },
-// ]
+import { getIngredientsFromServer } from "../store/ingredients/actions"
+import {
+  ingredientsPending,
+  ingredientsData,
+  ingredientsError,
+} from "../store/ingredients/selectors"
+import { buildOrder, orderNotPosted } from "../store/order/actions"
+import { getPrice } from "../store/price/selectors"
 
 export const Configurator = () => {
-  const { setPizza } = usePizzaContext()
   const history = useHistory()
-  const { register, watch } = useForm()
-  const { isLoading, isError, error, data } = useQuery("pizza", getIngredients)
+  const { register, watch, handleSubmit } = useForm()
+  const pending = useSelector(ingredientsPending)
+  const ingredients = useSelector(ingredientsData)
+  const error = useSelector(ingredientsError)
+  const price = useSelector(getPrice)
+  const dispatch = useDispatch()
+
+  const size = ingredients.filter((item) => item.category === "size")
+  const dough = ingredients.filter((item) => item.category === "dough")
+  const sauce = ingredients.filter((item) => item.category === "sauce")
+  const cheese = ingredients.filter((item) => item.category === "cheese")
+  const veggies = ingredients.filter((item) => item.category === "veggies")
+  const meat = ingredients.filter((item) => item.category === "meat")
 
   const selection = watch()
 
-  const handleSubmitForm = (event) => {
-    event.preventDefault()
-    setPizza(makePizza(data, selection))
+  dispatch(buildOrder(ingredients, selection))
+
+  useEffect(() => {
+    dispatch(getIngredientsFromServer())
+  }, [dispatch])
+
+  const onSubmit = () => {
+    dispatch(orderNotPosted())
     history.push("/checkout")
   }
 
-  if (isLoading) {
+  if (pending) {
     return <div>Loading...</div>
   }
 
-  if (isError) {
-    return <div>Error: {error.message}</div>
+  if (error) {
+    return <div>Something went wrong... {error}</div>
   }
 
   return (
     <>
       <h3>Соберите пиццу</h3>
-      <form onSubmit={handleSubmitForm}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <RadioGroup
           caption="Размер"
-          ingredients={data.filter((item) => item.category === "size")}
+          ingredients={size}
           category="size"
           register={register}
         />
         <RadioGroup
           caption="Тесто"
-          ingredients={data.filter((item) => item.category === "dough")}
+          ingredients={dough}
           category="dough"
           register={register}
         />
         <RadioGroup
           caption="Соус"
-          ingredients={data.filter((item) => item.category === "sauce")}
+          ingredients={sauce}
           category="sauce"
           register={register}
         />
         <CheckboxGroup
           caption="Сыр"
-          ingredients={data.filter((item) => item.category === "cheese")}
+          ingredients={cheese}
           category="cheese"
           register={register}
         />
         <CheckboxGroup
           caption="Овощи"
-          ingredients={data.filter((item) => item.category === "veggies")}
-          category="vegies"
+          ingredients={veggies}
+          category="veggies"
           register={register}
         />
         <CheckboxGroup
           caption="Мясо"
-          ingredients={data.filter((item) => item.category === "meat")}
+          ingredients={meat}
           category="meat"
           register={register}
         />
         <br />
         <br />
-        <button type="submit">{`Заказать ${calculatePrice(
-          data,
-          selection
-        )}р`}</button>
+        <button type="submit">{`Заказать ${price}р`}</button>
       </form>
     </>
   )

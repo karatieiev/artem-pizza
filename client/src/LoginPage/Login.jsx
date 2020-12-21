@@ -2,18 +2,19 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import { Link, useHistory } from "react-router-dom"
 import PropTypes from "prop-types"
-import { useAuthContext } from "../sharedComponents/AuthContext"
+import { useDispatch } from "react-redux"
+import { logIn } from "../store/auth/actions"
 
 export const Login = ({ submitForm }) => {
-  const { logIn } = useAuthContext()
   const history = useHistory()
   const { register, handleSubmit } = useForm()
+  const dispatch = useDispatch()
 
   const onSubmit = (data) => {
     if (submitForm) {
       submitForm(data)
     }
-    logIn()
+    dispatch(logIn())
     history.push("/")
   }
 

@@ -1,10 +1,11 @@
 import React from "react"
 import { Redirect, Route } from "react-router-dom"
 import PropTypes from "prop-types"
-import { useAuthContext } from "./AuthContext"
+import { useSelector } from "react-redux"
+import { isAuthenticated } from "../store/auth/selectors"
 
 export const PrivateRoute = ({ children, redirect, path }) => {
-  const { auth } = useAuthContext()
+  const auth = useSelector(isAuthenticated)
   if (auth) {
     return <Route path={path}>{children}</Route>
   }
