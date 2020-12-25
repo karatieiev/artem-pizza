@@ -1,4 +1,4 @@
-import { apiGetIngredients } from "../../api/ingredients"
+import { getIngredients } from "../../api/ingredients"
 import {
   INGREDIENTS_ERROR,
   INGREDIENTS_PENDING,
@@ -22,7 +22,7 @@ export const setIngredients = (payload) => ({
 export const getIngredientsFromServer = () => {
   return (dispatch) => {
     dispatch(pending())
-    apiGetIngredients()
+    getIngredients()
       .then((data) => {
         dispatch(setIngredients(data))
       })

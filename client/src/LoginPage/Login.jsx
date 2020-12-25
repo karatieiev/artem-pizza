@@ -1,19 +1,15 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 import { Link, useHistory } from "react-router-dom"
-import PropTypes from "prop-types"
 import { useDispatch } from "react-redux"
 import { logIn } from "../store/auth/actions"
 
-export const Login = ({ submitForm }) => {
+export const Login = () => {
   const history = useHistory()
   const { register, handleSubmit } = useForm()
   const dispatch = useDispatch()
 
-  const onSubmit = (data) => {
-    if (submitForm) {
-      submitForm(data)
-    }
+  const onSubmit = () => {
     dispatch(logIn())
     history.push("/")
   }
@@ -39,12 +35,4 @@ export const Login = ({ submitForm }) => {
       <Link to="/registration">Регистрация</Link>
     </>
   )
-}
-
-Login.propTypes = {
-  submitForm: PropTypes.func,
-}
-
-Login.defaultProps = {
-  submitForm: null,
 }

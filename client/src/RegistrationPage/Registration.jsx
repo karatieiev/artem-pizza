@@ -1,21 +1,14 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
-import PropTypes from "prop-types"
 
-export const Registration = ({ formSubmit }) => {
-  const { register, handleSubmit } = useForm()
-
-  const onSubmit = (data) => {
-    if (formSubmit) {
-      formSubmit(data)
-    }
-  }
+export const Registration = () => {
+  const { register } = useForm()
 
   return (
     <>
       <h3>Регистрация</h3>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
         <label htmlFor="login">
           Логин
           <input id="login" type="text" name="login" ref={register} />
@@ -35,12 +28,4 @@ export const Registration = ({ formSubmit }) => {
       <Link to="/login">Аутентификация</Link>
     </>
   )
-}
-
-Registration.propTypes = {
-  formSubmit: PropTypes.func,
-}
-
-Registration.defaultProps = {
-  formSubmit: null,
 }

@@ -1,52 +1,101 @@
 import React from "react"
-import { fireEvent, render } from "@testing-library/react"
+import { fireEvent, render, waitFor } from "@testing-library/react"
+import { Provider } from "react-redux"
 import { Configurator } from "./Configurator"
+import { store } from "../store/store"
+import { getIngredients } from "../api/ingredients"
+
+jest.mock("../api/ingredients", () => ({
+  getIngredients: jest.fn(),
+}))
+
+const getControlledPromise = () => {
+  let resolve
+  let reject
+  const promise = new Promise((res, rej) => {
+    resolve = res
+    reject = rej
+  })
+  return { resolve, reject, promise }
+}
 
 describe("Configurator", () => {
-  it("renders correctly", () => {
-    const { getByText } = render(<Configurator />)
-    expect(getByText("Размер")).toBeInTheDocument()
-    expect(getByText("Тесто")).toBeInTheDocument()
-    expect(getByText("Соус")).toBeInTheDocument()
-    expect(getByText("Сыр")).toBeInTheDocument()
-    expect(getByText("Овощи")).toBeInTheDocument()
-    expect(getByText("Мясо")).toBeInTheDocument()
+  it("renders loading message", () => {
+    getIngredients.mockImplementation(() => getControlledPromise().promise)
+    const { getByText } = render(
+      <Provider store={store}>
+        <Configurator />
+      </Provider>
+    )
+    expect(getByText("Loading...")).toBeInTheDocument()
   })
-  describe("only with size checked", () => {
-    it("shows correct price for different sizes", () => {
-      const { getByText } = render(<Configurator />)
-      let element = getByText("30см")
-      fireEvent.click(element)
-      expect(getByText("Заказать 200р")).toBeInTheDocument()
-      element = getByText("35см")
-      fireEvent.click(element)
-      expect(getByText("Заказать 250р")).toBeInTheDocument()
+  it("renders correctly", async () => {
+    const { promise, resolve } = getControlledPromise()
+    getIngredients.mockImplementation(() => promise)
+    resolve([
+      {
+        id: "0",
+        slug: "size",
+        name: "30см",
+        category: "size",
+        price: "200",
+      },
+    ])
+    const { getByText } = render(
+      <Provider store={store}>
+        <Configurator />
+      </Provider>
+    )
+    await waitFor(() => {
+      expect(getByText("Размер")).toBeInTheDocument()
     })
   })
-  describe("with all additions checked", () => {
-    it("shows maximum price", () => {
-      const { getByText } = render(<Configurator />)
-      let element = getByText("35см")
-      fireEvent.click(element)
-      element = getByText("моцарелла")
-      fireEvent.click(element)
-      element = getByText("чеддер")
-      fireEvent.click(element)
-      element = getByText("дор блю")
-      fireEvent.click(element)
-      element = getByText("помидоры")
-      fireEvent.click(element)
-      element = getByText("грибы")
-      fireEvent.click(element)
-      element = getByText("перец")
-      fireEvent.click(element)
-      element = getByText("бекон")
-      fireEvent.click(element)
-      element = getByText("пепперони")
-      fireEvent.click(element)
-      element = getByText("ветчина")
-      fireEvent.click(element)
-      expect(getByText("Заказать 511р")).toBeInTheDocument()
+  it("renders error message", async () => {
+    const { promise, reject } = getControlledPromise()
+    getIngredients.mockImplementation(() => promise)
+    reject({ message: "error" })
+    const { getByText } = render(
+      <Provider store={store}>
+        <Configurator />
+      </Provider>
+    )
+    await waitFor(() => {
+      expect(getByText("Something went wrong... error")).toBeInTheDocument()
     })
+  })
+  it("shows correct price", async () => {
+    const { promise, resolve } = getControlledPromise()
+    getIngredients.mockImplementation(() => promise)
+    resolve([
+      {
+        id: "0",
+        slug: "ham",
+        name: "ветчина",
+        category: "meat",
+        price: "11",
+      },
+      {
+        id: "1",
+        slug: "bacon",
+        name: "бекон",
+        category: "meat",
+        price: "11",
+      },
+    ])
+    const { getByText } = render(
+      <Provider store={store}>
+        <Configurator />
+      </Provider>
+    )
+    await waitFor(() => {
+      expect(getByText("Мясо")).toBeInTheDocument()
+    })
+
+    const bacon = getByText("бекон")
+    fireEvent.click(bacon)
+    const ham = getByText("ветчина")
+    fireEvent.click(ham)
+
+    expect(getByText("Заказать 22р")).toBeInTheDocument()
   })
 })
