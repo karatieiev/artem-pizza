@@ -21,7 +21,8 @@ const getControlledPromise = () => {
 
 describe("Configurator", () => {
   it("renders loading message", () => {
-    getIngredients.mockImplementation(() => getControlledPromise().promise)
+    const { promise } = getControlledPromise()
+    getIngredients.mockImplementation(() => promise)
     const { getByText } = render(
       <Provider store={store}>
         <Configurator />
@@ -96,6 +97,6 @@ describe("Configurator", () => {
     const ham = getByText("ветчина")
     fireEvent.click(ham)
 
-    expect(getByText("Заказать 22р")).toBeInTheDocument()
+    expect(getByText("Заказать за 22р")).toBeInTheDocument()
   })
 })

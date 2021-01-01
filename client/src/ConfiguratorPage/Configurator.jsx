@@ -1,7 +1,7 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { useHistory } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector, shallowEqual } from "react-redux"
 import { RadioGroup } from "./RadioGroup"
 import { CheckboxGroup } from "./CheckboxGroup"
 import { getIngredientsFromServer } from "../store/ingredients/actions"
@@ -9,33 +9,57 @@ import {
   ingredientsPending,
   ingredientsData,
   ingredientsError,
+  ingredientsCategorySize,
+  ingredientsCategoryDough,
+  ingredientsCategorySauce,
+  ingredientsCategoryCheese,
+  ingredientsCategoryVeggies,
+  ingredientsCategoryMeat,
 } from "../store/ingredients/selectors"
 import { buildOrder, orderNotPosted } from "../store/order/actions"
-import { getPrice } from "../store/price/selectors"
+import { calculatePrice } from "../store/price/calculatePrice"
+import styles from "./Configurator.module.scss"
+
+const useShallowEqualSelector = (selector) =>
+  useSelector(selector, shallowEqual)
 
 export const Configurator = () => {
   const history = useHistory()
-  const { register, watch, handleSubmit } = useForm()
-  const pending = useSelector(ingredientsPending)
-  const ingredients = useSelector(ingredientsData)
-  const error = useSelector(ingredientsError)
-  const price = useSelector(getPrice)
+  const { register, watch, handleSubmit, setValue } = useForm()
+
+  const pending = useShallowEqualSelector(ingredientsPending)
+  const ingredients = useShallowEqualSelector(ingredientsData)
+  const error = useShallowEqualSelector(ingredientsError)
+
+  const size = useShallowEqualSelector(ingredientsCategorySize)
+  const dough = useShallowEqualSelector(ingredientsCategoryDough)
+  const sauce = useShallowEqualSelector(ingredientsCategorySauce)
+  const cheese = useShallowEqualSelector(ingredientsCategoryCheese)
+  const veggies = useShallowEqualSelector(ingredientsCategoryVeggies)
+  const meat = useShallowEqualSelector(ingredientsCategoryMeat)
+
   const dispatch = useDispatch()
 
-  const size = ingredients.filter((item) => item.category === "size")
-  const dough = ingredients.filter((item) => item.category === "dough")
-  const sauce = ingredients.filter((item) => item.category === "sauce")
-  const cheese = ingredients.filter((item) => item.category === "cheese")
-  const veggies = ingredients.filter((item) => item.category === "veggies")
-  const meat = ingredients.filter((item) => item.category === "meat")
-
   const selection = watch()
+
+  const refRenderCount = useRef(0)
+  refRenderCount.current += 1
+
+  const price = calculatePrice(ingredients, selection)
 
   dispatch(buildOrder(ingredients, selection))
 
   useEffect(() => {
-    dispatch(getIngredientsFromServer())
-  }, [dispatch])
+    if (!ingredients.length) {
+      dispatch(getIngredientsFromServer())
+    }
+  }, [])
+
+  useEffect(() => {
+    setValue("size", size[0]?.id)
+    setValue("dough", dough[0]?.id)
+    setValue("sauce", sauce[0]?.id)
+  }, [ingredients])
 
   const onSubmit = () => {
     dispatch(orderNotPosted())
@@ -52,7 +76,7 @@ export const Configurator = () => {
 
   return (
     <>
-      <h3>Соберите пиццу</h3>
+      <div>Renders count: {refRenderCount.current}</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <RadioGroup
           caption="Размер"
@@ -90,9 +114,9 @@ export const Configurator = () => {
           category="meat"
           register={register}
         />
-        <br />
-        <br />
-        <button type="submit">{`Заказать ${price}р`}</button>
+        <span className={styles.button}>
+          <button type="submit">{`Заказать за ${price}р`}</button>
+        </span>
       </form>
     </>
   )
