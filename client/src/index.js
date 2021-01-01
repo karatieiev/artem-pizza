@@ -2,19 +2,17 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 import { BrowserRouter } from "react-router-dom"
+import { Provider } from "react-redux"
 import { App } from "./App"
-import { AuthProvider } from "./sharedComponents/AuthContext"
-import { PizzaProvider } from "./sharedComponents/PizzaContext"
+import { store } from "./store/store"
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <PizzaProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </PizzaProvider>
-    </AuthProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 )

@@ -1,8 +1,9 @@
 import React from "react"
-import { usePizzaContext } from "../sharedComponents/PizzaContext"
+import { useSelector } from "react-redux"
+import { orderData } from "../store/order/selectors"
 
 export const Preview = () => {
-  const { pizza } = usePizzaContext()
+  const pizza = useSelector(orderData)
   const size = pizza.filter((item) => item.category === "size")
   const dough = pizza.filter((item) => item.category === "dough")
   const sauce = pizza.filter((item) => item.category === "sauce")

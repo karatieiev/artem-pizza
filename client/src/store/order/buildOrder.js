@@ -1,4 +1,4 @@
-export const makePizza = (ingredients, selection) => {
+export const buildOrder = (ingredients, selection) => {
   const selectedIDs = []
 
   Object.keys(selection).forEach((key) => {

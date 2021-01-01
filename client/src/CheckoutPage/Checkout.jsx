@@ -1,35 +1,40 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 import { useHistory } from "react-router-dom"
-import PropTypes from "prop-types"
-import { usePizzaContext } from "../sharedComponents/PizzaContext"
-import { getProcessingSystem } from "./getProcessingSystem"
-import { postOrder } from "../api/orders"
+import { useDispatch, useSelector } from "react-redux"
 import { Preview } from "./Preview"
+import {
+  orderData,
+  orderError,
+  orderPending,
+  orderPosted,
+} from "../store/order/selectors"
+import { getPrice } from "../store/price/selectors"
+import { postOrderToServer } from "../store/order/actions"
 
-export const Checkout = ({ formSubmit }) => {
-  const { pizza } = usePizzaContext()
+export const Checkout = () => {
+  const pizza = useSelector(orderData)
   const history = useHistory()
-  const { register, watch, handleSubmit } = useForm({
+  const price = useSelector(getPrice)
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       card: "",
     },
   })
-
-  const formData = watch()
+  const dispatch = useDispatch()
+  const orderPostedToServer = useSelector(orderPosted)
+  const error = useSelector(orderError)
+  const pending = useSelector(orderPending)
 
   const onSubmit = (data) => {
-    if (formSubmit) {
-      formSubmit(data)
-    }
-    postOrder({
-      ingredients: pizza,
-      address: data.address,
-      name: data.name,
-      card_number: data.card,
-    }).then(() => {
-      history.push("/order")
-    })
+    dispatch(
+      postOrderToServer({
+        ingredients: pizza,
+        address: data.address,
+        name: data.name,
+        card_number: data.card,
+      })
+    )
   }
 
   const normalizeCardNumber = (value) => {
@@ -46,6 +51,18 @@ export const Checkout = ({ formSubmit }) => {
     const evnt = event
     const { value } = event.target
     evnt.target.value = normalizeCardNumber(value)
+  }
+
+  if (orderPostedToServer) {
+    history.push("/order")
+  }
+
+  if (pending) {
+    return <div>Posting...</div>
+  }
+
+  if (error) {
+    return <div>Something went wrong... {error}</div>
   }
 
   return (
@@ -75,22 +92,10 @@ export const Checkout = ({ formSubmit }) => {
           />
         </label>
         <br />
-        <span>{` ${getProcessingSystem(formData.card.substring(0, 19))}`}</span>
         <br />
         <br />
-        <button type="submit">{`Оплатить ${pizza.reduce(
-          (sum, current) => sum + +current.price,
-          0
-        )} р`}</button>
+        <button type="submit">{`Оплатить ${price} р`}</button>
       </form>
     </>
   )
-}
-
-Checkout.propTypes = {
-  formSubmit: PropTypes.func,
-}
-
-Checkout.defaultProps = {
-  formSubmit: null,
 }

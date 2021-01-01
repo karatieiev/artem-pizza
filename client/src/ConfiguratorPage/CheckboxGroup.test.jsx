@@ -10,6 +10,7 @@ describe("InputGroup", () => {
         category: "category",
         name: "name",
         price: 100,
+        id: "0",
       },
     ]
     const { getByText } = render(
