@@ -9,13 +9,11 @@ import { Checkout } from "./CheckoutPage"
 import { Order } from "./OrderPage"
 import { OrderList } from "./OrdersListPage"
 // import { Home } from "./HomePage"
-import { Navigation } from "./sharedComponents/Navigation"
+// import { Navigation } from "./sharedComponents/Navigation"
 
 export const App = () => {
   return (
     <>
-      <Navigation />
-      <br />
       <Switch>
         <PrivateRoute exact path="/" redirect="/login">
           <Configurator />

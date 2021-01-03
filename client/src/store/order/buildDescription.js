@@ -4,10 +4,10 @@ export const buildDescription = (order) => {
     order.filter((i) => i.category === "dough")[0]?.slug === "thin"
       ? "на тонком тесте"
       : "на толстом тесте"
-  desc = `${desc} • ${name}`
+  desc = `${desc} ${name}`
 
   name = order.filter((i) => i.category === "sauce")[0]?.name
-  desc = `${desc} • ${name}`
+  desc = `${desc} • ${name} соус`
 
   order
     .filter((i) => i.category === "cheese")
