@@ -16,3 +16,4 @@ export const orderMeat = (state) =>
   state.order.data.filter((item) => item.category === "meat")
 export const orderDescription = (state) => state.order.description
 export const orderName = (state) => state.order.name
+export const orderPrice = (state) => state.order.price

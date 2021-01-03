@@ -3,7 +3,7 @@ import { useQuery } from "react-query"
 import { getOrders } from "../api/orders"
 
 export const OrderList = () => {
-  const { isLoading, isError, error, data } = useQuery("orders", getOrders)
+  const { isLoading, isError, error, data } = useQuery("order", getOrders)
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -20,7 +20,6 @@ export const OrderList = () => {
         item.name !== undefined ? (
           <>
             <p>Заказ:</p>
-            {item.ingredients.map((i) => (i ? ` ${i.name}` : null))}
             <div>Имя: {item.name}</div>
             <div>Адрес: {item.address}</div>
             <hr />

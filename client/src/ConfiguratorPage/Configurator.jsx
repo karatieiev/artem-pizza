@@ -18,9 +18,13 @@ import {
 } from "../store/ingredients/selectors"
 import { buildOrder, orderNotPosted } from "../store/order/actions"
 import styles from "./Configurator.module.scss"
-import { StyledOrderDescription } from "../sharedComponents/OrderDescription"
-import { orderDescription, orderName } from "../store/order/selectors"
-import { getPrice } from "../store/price/selectors"
+import { OrderDescription } from "../sharedComponents/OrderDescription"
+import {
+  orderDescription,
+  orderName,
+  orderPrice,
+} from "../store/order/selectors"
+import { PizzaImage } from "./PizzaImage"
 
 const useShallowEqualSelector = (selector) =>
   useSelector(selector, shallowEqual)
@@ -42,7 +46,7 @@ export const Configurator = () => {
 
   const name = useShallowEqualSelector(orderName)
   const description = useShallowEqualSelector(orderDescription)
-  const price = useShallowEqualSelector(getPrice)
+  const price = useShallowEqualSelector(orderPrice)
 
   const dispatch = useDispatch()
   const selection = watch()
@@ -80,7 +84,8 @@ export const Configurator = () => {
   return (
     <>
       <div>Renders count: {refRenderCount.current}</div>
-      <StyledOrderDescription name={name} description={description} />
+      <PizzaImage />
+      <OrderDescription name={name} description={description} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <RadioGroup
           caption="Размер"
