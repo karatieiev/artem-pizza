@@ -1,18 +1,26 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { orderData } from "../store/order/selectors"
+import {
+  orderCheese,
+  orderDough,
+  orderMeat,
+  orderSauce,
+  orderSize,
+  orderVeggies,
+} from "../store/order/selectors"
+import { getPrice } from "../store/price/selectors"
 
 export const Preview = () => {
-  const pizza = useSelector(orderData)
-  const size = pizza.filter((item) => item.category === "size")
-  const dough = pizza.filter((item) => item.category === "dough")
-  const sauce = pizza.filter((item) => item.category === "sauce")
-  const cheese = pizza.filter((item) => item.category === "cheese")
-  const veggies = pizza.filter((item) => item.category === "veggies")
-  const meat = pizza.filter((item) => item.category === "meat")
+  const size = useSelector(orderSize)
+  const dough = useSelector(orderDough)
+  const sauce = useSelector(orderSauce)
+  const cheese = useSelector(orderCheese)
+  const veggies = useSelector(orderVeggies)
+  const meat = useSelector(orderMeat)
+  const price = useSelector(getPrice)
 
   return (
-    <>
+    <div>
       <div>Описание заказа</div>
       {size[0] && <div>Размер: *{size.map((item) => `${item.name}*`)}</div>}
       {dough[0] && <div>Тесто: *{dough.map((item) => `${item.name}*`)}</div>}
@@ -22,9 +30,7 @@ export const Preview = () => {
         <div>Овощи: *{veggies.map((item) => `${item.name}*`)}</div>
       )}
       {meat[0] && <div>Мясо: *{meat.map((item) => `${item.name}*`)}</div>}
-      <div>
-        Сумма заказа: {pizza.reduce((sum, current) => sum + +current.price, 0)}р
-      </div>
-    </>
+      <div>Сумма заказа: {price}р</div>
+    </div>
   )
 }

@@ -17,8 +17,10 @@ import {
   ingredientsCategoryMeat,
 } from "../store/ingredients/selectors"
 import { buildOrder, orderNotPosted } from "../store/order/actions"
-import { calculatePrice } from "../store/price/calculatePrice"
 import styles from "./Configurator.module.scss"
+import { StyledOrderDescription } from "../sharedComponents/OrderDescription"
+import { orderDescription, orderName } from "../store/order/selectors"
+import { getPrice } from "../store/price/selectors"
 
 const useShallowEqualSelector = (selector) =>
   useSelector(selector, shallowEqual)
@@ -38,14 +40,15 @@ export const Configurator = () => {
   const veggies = useShallowEqualSelector(ingredientsCategoryVeggies)
   const meat = useShallowEqualSelector(ingredientsCategoryMeat)
 
-  const dispatch = useDispatch()
+  const name = useShallowEqualSelector(orderName)
+  const description = useShallowEqualSelector(orderDescription)
+  const price = useShallowEqualSelector(getPrice)
 
+  const dispatch = useDispatch()
   const selection = watch()
 
   const refRenderCount = useRef(0)
   refRenderCount.current += 1
-
-  const price = calculatePrice(ingredients, selection)
 
   dispatch(buildOrder(ingredients, selection))
 
@@ -77,6 +80,7 @@ export const Configurator = () => {
   return (
     <>
       <div>Renders count: {refRenderCount.current}</div>
+      <StyledOrderDescription name={name} description={description} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <RadioGroup
           caption="Размер"
