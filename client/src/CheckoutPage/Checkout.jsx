@@ -2,20 +2,20 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { Preview } from "./Preview"
 import {
-  orderData,
+  orderDescription,
   orderError,
+  orderName,
   orderPending,
   orderPosted,
+  orderPrice,
 } from "../store/order/selectors"
-import { getPrice } from "../store/price/selectors"
+
 import { postOrderToServer } from "../store/order/actions"
 
 export const Checkout = () => {
-  const pizza = useSelector(orderData)
   const history = useHistory()
-  const price = useSelector(getPrice)
+  const price = useSelector(orderPrice)
   const { register, handleSubmit } = useForm({
     defaultValues: {
       card: "",
@@ -25,14 +25,17 @@ export const Checkout = () => {
   const orderPostedToServer = useSelector(orderPosted)
   const error = useSelector(orderError)
   const pending = useSelector(orderPending)
+  const pizzaName = useSelector(orderName)
+  const pizzaDescription = useSelector(orderDescription)
+  const pizzaPrice = useSelector(orderPrice)
 
   const onSubmit = (data) => {
     dispatch(
       postOrderToServer({
-        ingredients: pizza,
         address: data.address,
         name: data.name,
         card_number: data.card,
+        ingredients: [pizzaName, pizzaDescription, pizzaPrice],
       })
     )
   }
@@ -68,7 +71,6 @@ export const Checkout = () => {
   return (
     <>
       <h3>Оформление заказа</h3>
-      <Preview />
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">

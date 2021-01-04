@@ -6,12 +6,12 @@ import { ingredientsData } from "./ingredients/reducer.data"
 import { ingredientsPending } from "./ingredients/reducer.pending"
 import { ingredientsError } from "./ingredients/reducer.error"
 import { orderData } from "./order/reducer.data"
-import { price } from "./price/reducer"
 import { orderPending } from "./order/reducer.pending"
 import { orderError } from "./order/reducer.error"
 import { orderPosted } from "./order/reducer.posted"
 import { orderDescription } from "./order/reducer.description"
 import { orderName } from "./order/reducer.name"
+import { orderPrice } from "./order/reducer.price"
 
 const ingredients = combineReducers({
   data: ingredientsData,
@@ -26,6 +26,7 @@ const order = combineReducers({
   posted: orderPosted,
   description: orderDescription,
   name: orderName,
+  price: orderPrice,
 })
 
 export const store = createStore(
@@ -33,7 +34,6 @@ export const store = createStore(
     auth,
     ingredients,
     order,
-    price,
   }),
   composeWithDevTools(applyMiddleware(thunk))
 )

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useDispatch, useSelector, shallowEqual } from "react-redux"
@@ -18,9 +18,16 @@ import {
 } from "../store/ingredients/selectors"
 import { buildOrder, orderNotPosted } from "../store/order/actions"
 import styles from "./Configurator.module.scss"
-import { StyledOrderDescription } from "../sharedComponents/OrderDescription"
-import { orderDescription, orderName } from "../store/order/selectors"
-import { getPrice } from "../store/price/selectors"
+import { OrderDescription } from "../sharedComponents/OrderDescription"
+import {
+  orderDescription,
+  orderName,
+  orderPrice,
+} from "../store/order/selectors"
+import { PizzaImage } from "./PizzaImage"
+import favicon from "../assets/favicon.ico"
+import artempizzaLogo from "../assets/artempizza.png"
+import userLogo from "../assets/userLogo.ico"
 
 const useShallowEqualSelector = (selector) =>
   useSelector(selector, shallowEqual)
@@ -42,13 +49,13 @@ export const Configurator = () => {
 
   const name = useShallowEqualSelector(orderName)
   const description = useShallowEqualSelector(orderDescription)
-  const price = useShallowEqualSelector(getPrice)
+  const price = useShallowEqualSelector(orderPrice)
 
   const dispatch = useDispatch()
   const selection = watch()
 
-  const refRenderCount = useRef(0)
-  refRenderCount.current += 1
+  // const refRenderCount = useRef(0)
+  // refRenderCount.current += 1
 
   dispatch(buildOrder(ingredients, selection))
 
@@ -79,8 +86,13 @@ export const Configurator = () => {
 
   return (
     <>
-      <div>Renders count: {refRenderCount.current}</div>
-      <StyledOrderDescription name={name} description={description} />
+      <div className={styles.header}>
+        <img src={favicon} alt="" />
+        <img src={artempizzaLogo} alt="" />
+        <img src={userLogo} alt="" />
+      </div>
+      <PizzaImage />
+      <OrderDescription name={name} description={description} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <RadioGroup
           caption="Размер"

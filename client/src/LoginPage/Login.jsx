@@ -11,7 +11,7 @@ export const Login = () => {
 
   const onSubmit = () => {
     dispatch(logIn())
-    history.goBack()
+    history.push("/")
   }
 
   return (

@@ -8,19 +8,14 @@ import { PageNotFound } from "./sharedComponents/PageNotFound"
 import { Checkout } from "./CheckoutPage"
 import { Order } from "./OrderPage"
 import { OrderList } from "./OrdersListPage"
-import { Home } from "./HomePage"
-import { Navigation } from "./sharedComponents/Navigation"
+// import { Home } from "./HomePage"
+// import { Navigation } from "./sharedComponents/Navigation"
 
 export const App = () => {
   return (
     <>
-      <Navigation />
-      <br />
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <PrivateRoute path="/configurator" redirect="/login">
+        <PrivateRoute exact path="/" redirect="/login">
           <Configurator />
         </PrivateRoute>
         <PrivateRoute path="/checkout" redirect="/login">
