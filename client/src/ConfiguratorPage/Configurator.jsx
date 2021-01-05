@@ -18,7 +18,6 @@ import {
 } from "../store/ingredients/selectors"
 import { buildOrder, orderNotPosted } from "../store/order/actions"
 import styles from "./Configurator.module.scss"
-import { OrderDescription } from "../sharedComponents/OrderDescription"
 import {
   orderDescription,
   orderName,
@@ -92,7 +91,10 @@ export const Configurator = () => {
         <img src={userLogo} alt="" />
       </div>
       <PizzaImage />
-      <OrderDescription name={name} description={description} />
+      <div className={styles.orderDescription}>
+        <p>{name}</p>
+        <div>{description}</div>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <RadioGroup
           caption="Размер"
@@ -130,9 +132,10 @@ export const Configurator = () => {
           category="meat"
           register={register}
         />
-        <span className={styles.button}>
-          <button type="submit">{`Заказать за ${price}р`}</button>
-        </span>
+        <div className={styles.bottomSpace} />
+        <div className={styles.button}>
+          <button type="submit">{`Заказать за ${price} руб`}</button>
+        </div>
       </form>
     </>
   )
