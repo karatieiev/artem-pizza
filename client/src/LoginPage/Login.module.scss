@@ -1,0 +1,91 @@
+.background {
+  position: absolute;
+  background: #f9f9fb;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.header {
+  position: relative;
+  font-family: Rounded Mplus 1c;
+  font-style: normal;
+  font-weight: 800;   
+  margin: 3% 5% 0% 5%;
+  height: 9vw;
+  font-size: 5vw;
+
+  img {
+    position: absolute;
+    top: 2vw;
+    height: 4.5vw;
+    cursor: pointer;
+  }
+
+  span {
+    vertical-align: middle;
+    margin-left: 2em;
+  }
+}
+
+.container {
+  position: relative;
+  padding: 5%;
+  margin: 3% 5% 5% 5%;
+  background: white;
+  box-shadow: 0px 8px 16px rgba(75, 75, 124, 0.05);
+  border-radius: 1em;  
+}
+
+.form {
+  font-family: Rounded Mplus 1c;
+  font-style: normal;
+  font-weight: 500;  
+  font-size: 4vw;
+  color: #4b4b7c;
+
+  input {
+    display: block;
+    width: 100%;
+    margin-top: 2vw;
+    background: #ffffff;
+    border: 2px solid #e1e1ed;
+    box-sizing: border-box;
+    border-radius: 6px;   
+    height: 10vw; 
+  }
+
+  input:focus, button:focus {
+    outline: none;
+  }
+
+  label {
+    display: block;
+  }
+
+  label:nth-child(3) {
+    margin-top: 5vw;
+  }
+}
+.button {
+  font-family: Rounded Mplus 1c;
+  font-style: normal;
+  font-size: 3.5vw;
+  font-weight: 800;
+  margin: 6% 0% 0% 0%;
+  width: 100%;
+  border-radius: 1em; 
+  padding: 0.7em;
+  border: none;
+}
+
+.buttonEnable {
+  background: #00a896;
+  color: white;   
+}
+
+.buttonDisable {
+  background: #f9f9fb;
+  color: #8181b1;   
+}
