@@ -1,3 +1,11 @@
+/*
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
+
+body {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}  
+*/
+
 .background {
   position: absolute;
   background: #f9f9fb;
@@ -14,7 +22,7 @@
   font-weight: 800;   
   margin: 3% 5% 0% 5%;
   height: 9vw;
-  font-size: 5vw;
+  font-size: 5.2vw;
 
   img {
     position: absolute;
@@ -53,11 +61,15 @@
     border: 2px solid #e1e1ed;
     box-sizing: border-box;
     border-radius: 6px;   
-    height: 10vw; 
+    height: 11vw; 
   }
 
   input:focus, button:focus {
     outline: none;
+  }
+
+  input[type="text"] {
+    font-size: 1em;
   }
 
   label {
@@ -71,7 +83,7 @@
 .button {
   font-family: Rounded Mplus 1c;
   font-style: normal;
-  font-size: 3.5vw;
+  font-size: 1em;
   font-weight: 800;
   margin: 6% 0% 0% 0%;
   width: 100%;
