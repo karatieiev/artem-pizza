@@ -1,0 +1,222 @@
+.background {
+  position: absolute;
+  background: #f9f9fb;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  font-family: Rounded Mplus 1c;
+  font-style: normal;
+  font-weight: 500;  
+  font-size: 4vw;
+
+  label {
+    font-size: 1.1em;
+  }
+
+  input {
+    width: 100%;
+    background: #ffffff;
+    border: 2px solid #e1e1ed;
+    box-sizing: border-box;
+    border-radius: 6px;   
+    height: 11vw; 
+    padding: 0% 3vw 0% 3vw;
+  }
+
+  input:focus, button:focus {
+    outline: none;
+  }
+
+  input[type="text"] {
+    font-size: 1.1em;
+  }
+  
+  input::placeholder {
+    color: #1f1f33;
+    opacity: 0.5;
+    font-weight: 400;
+    font-size: 1em;
+  }  
+}
+
+.header {
+  position: relative;
+  font-family: Rounded Mplus 1c;
+  font-style: normal;
+  font-weight: 800;   
+  margin: 3% 5% 0% 5%;
+  height: 9vw;
+  font-size: 5.2vw;
+
+  img {
+    position: absolute;
+    top: 2vw;
+    height: 4.5vw;
+    cursor: pointer;
+  }
+
+  span {
+    vertical-align: middle;
+    margin-left: 2em;
+  }
+}
+
+.orderDescription {
+  font-family: Ronded Mplus 1c;
+  font-style: normal;
+  font-size: 4vw;
+  padding: 3% 5% 5% 5%;
+  margin: 3% 5% 0% 5%;
+  background: white;
+  box-shadow: 0px 8px 16px rgba(75, 75, 124, 0.05);
+  border-radius: 1em;  
+
+  div:nth-child(1) {
+    color: black;
+    font-weight: 500;
+    font-size: 1.2em;
+  }
+
+  div:nth-child(2) {
+    margin-top: 4%;
+    color: #4b4b7c;
+    font-weight: 400;
+    font-size: 0.9em;
+  }
+
+  div:nth-child(3) {
+    margin-top: 3%;
+    color: #4b4b7c;
+    border-bottom: 0.5vw dashed #e1e1ed;
+  } 
+  
+  div:nth-child(4) {
+    margin-top: 4%;
+    color: #4b4b7c;
+    font-weight: 800;
+    font-size: 1.2em;
+  }  
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  margin: 5% 5% 0 5%;
+
+  input {
+    margin-top: 5vw;
+  }
+}
+
+.addressDetails {
+  display: flex;
+  flex-direction: row;  
+  justify-content: space-between;
+  margin: 3.5vw 5% 0 5%; 
+
+  label {
+    color: #4b4b7c;
+    font-size: 1em;
+    font-weight: 400; 
+  }
+
+  input {
+    margin-top: 1.5vw;
+  }
+
+  div {
+    width: 32%;
+  }
+}
+
+.cardNumber {
+  margin: 6% 5% 0 5%;
+  
+  input {
+    margin-top: 5%;
+  }
+}
+
+.cardData {
+  margin: 4% 5% 0% 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  input:nth-child(1) {
+    width: 32%
+  }
+  input:nth-child(2) {
+    width: 20%
+  }
+}
+
+.footer {
+  background: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 42.5vw;
+  box-shadow: 0px -16px 32px rgba(75, 75, 124, 0.05), 
+    0px 0px 4px rgba(75, 75, 124, 0.1);
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0% 5% 0% 5%;
+    color: #4b4b7c;
+    font-weight: 400;
+    font-size: 0.9em;
+  }
+
+  div:nth-child(1) {
+    margin-top: 3vw;
+  }
+
+  div:nth-child(2) {
+    margin-top: 1vw;
+  }
+
+  div:nth-child(3) {
+    border-bottom: 0.5vw dashed #e1e1ed;
+    margin-top: 1.5vw;
+  }
+
+  div:nth-child(4) {
+    margin-top: 2vw;
+    font-weight: 500;
+  }  
+
+
+  button {
+    font-family: Rounded Mplus 1c;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1em;
+    width: 90%;
+    //background: #00a896;
+    border-radius: 1em; 
+    color: white;   
+    padding: 0.7em;
+    border: none;  
+    margin: 5% 5% 0% 5%;  
+  }
+}
+
+.buttonEnable {
+  background: #00a896;
+  color: white;   
+}
+
+.buttonDisable {
+  background: #f9f9fb;
+  color: #8181b1;   
+}
+
+.bottomSpace {
+  height: 45vw;
+}

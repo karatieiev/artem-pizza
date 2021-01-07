@@ -97,6 +97,6 @@ describe("Configurator", () => {
     const ham = getByText("ветчина")
     fireEvent.click(ham)
 
-    expect(getByText("Заказать за 22р")).toBeInTheDocument()
+    expect(getByText("Заказать за 22 руб")).toBeInTheDocument()
   })
 })
