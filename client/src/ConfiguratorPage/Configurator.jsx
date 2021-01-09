@@ -24,9 +24,9 @@ import {
   orderPrice,
 } from "../store/order/selectors"
 import { PizzaImage } from "./PizzaImage"
-import favicon from "../assets/favicon.ico"
-import artempizzaLogo from "../assets/artempizza.png"
-import userLogo from "../assets/userLogo.ico"
+import favicon from "../assets/logo.svg"
+import artempizzaLogo from "../assets/title.svg"
+import userLogo from "../assets/icn_account.svg"
 
 const useShallowEqualSelector = (selector) =>
   useSelector(selector, shallowEqual)

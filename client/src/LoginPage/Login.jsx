@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { logIn } from "../store/auth/actions"
 import styles from "./Login.module.scss"
-import backward from "../assets/backward.png"
+import backward from "../assets/icn_arrow-left.svg"
 
 export const Login = () => {
   const history = useHistory()

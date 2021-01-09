@@ -1,17 +1,17 @@
 import React from "react"
 import PropTypes from "prop-types"
-import styles from "./OrderDescription.module.scss"
+import styles from "./OrderPreview.module.scss"
 
-export const OrderDescription = ({ name, description }) => {
+export const OrderPreview = ({ name, description }) => {
   return (
-    <div className={styles.orderDescription}>
+    <div className={styles.container}>
       <p>{name}</p>
       <div>{description}</div>
     </div>
   )
 }
 
-OrderDescription.propTypes = {
+OrderPreview.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 }
