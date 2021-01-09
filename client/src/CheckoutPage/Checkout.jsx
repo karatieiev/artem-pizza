@@ -12,7 +12,7 @@ import {
 } from "../store/order/selectors"
 import { postOrderToServer } from "../store/order/actions"
 import styles from "./Checkout.module.scss"
-import backward from "../assets/backward.png"
+import backward from "../assets/icn_arrow-left.svg"
 
 export const Checkout = () => {
   const history = useHistory()
