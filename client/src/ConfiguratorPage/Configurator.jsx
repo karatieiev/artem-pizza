@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { useHistory } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useDispatch, useSelector, shallowEqual } from "react-redux"
@@ -53,8 +53,9 @@ export const Configurator = () => {
   const dispatch = useDispatch()
   const selection = watch()
 
-  // const refRenderCount = useRef(0)
-  // refRenderCount.current += 1
+  const refRenderCount = useRef(0)
+  refRenderCount.current += 1
+  console.log(refRenderCount.current)
 
   dispatch(buildOrder(ingredients, selection))
 
@@ -96,42 +97,52 @@ export const Configurator = () => {
         <div>{description}</div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <RadioGroup
-          caption="Размер"
-          ingredients={size}
-          category="size"
-          register={register}
-        />
-        <RadioGroup
-          caption="Тесто"
-          ingredients={dough}
-          category="dough"
-          register={register}
-        />
-        <RadioGroup
-          caption="Соус"
-          ingredients={sauce}
-          category="sauce"
-          register={register}
-        />
-        <CheckboxGroup
-          caption="Сыр"
-          ingredients={cheese}
-          category="cheese"
-          register={register}
-        />
-        <CheckboxGroup
-          caption="Овощи"
-          ingredients={veggies}
-          category="veggies"
-          register={register}
-        />
-        <CheckboxGroup
-          caption="Мясо"
-          ingredients={meat}
-          category="meat"
-          register={register}
-        />
+        <div className={styles.sizeAndDough}>
+          <RadioGroup
+            caption="Размер"
+            ingredients={size}
+            category="size"
+            register={register}
+            setValue={setValue}
+          />
+          <RadioGroup
+            caption="Тесто"
+            ingredients={dough}
+            category="dough"
+            register={register}
+            setValue={setValue}
+          />
+        </div>
+        <div className={styles.column}>
+          <RadioGroup
+            caption="Соус"
+            ingredients={sauce}
+            category="sauce"
+            register={register}
+            setValue={setValue}
+          />
+          <CheckboxGroup
+            caption="Сыр"
+            ingredients={cheese}
+            category="cheese"
+            register={register}
+            setValue={setValue}
+          />
+          <CheckboxGroup
+            caption="Овощи"
+            ingredients={veggies}
+            category="vegetables"
+            register={register}
+            setValue={setValue}
+          />
+          <CheckboxGroup
+            caption="Мясо"
+            ingredients={meat}
+            category="meat"
+            register={register}
+            setValue={setValue}
+          />
+        </div>
         <div className={styles.bottomSpace} />
         <div className={styles.button}>
           <button type="submit">{`Заказать за ${price} руб`}</button>

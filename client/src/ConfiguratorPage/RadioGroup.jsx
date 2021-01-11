@@ -1,6 +1,6 @@
 import React, { Fragment } from "react"
 import PropTypes from "prop-types"
-import styles from "./Groups.module.scss"
+import styles from "./RadioGroup.module.scss"
 
 export const RadioGroup = ({ ingredients, category, caption, register }) => {
   return (

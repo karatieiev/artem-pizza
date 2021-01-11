@@ -65,6 +65,19 @@
   }  
 }
 
+.sizeAndDough {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.column {
+  margin-left: 4vw;
+  margin-right: 4vw;
+}
+
 .bottomSpace {
   height: 21vw;
 }
