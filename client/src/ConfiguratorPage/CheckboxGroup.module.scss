@@ -1,0 +1,77 @@
+.input {
+  width: 5vw;
+  height: 5vw;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance:none;
+  outline: none;
+  background: white url('../assets/checkbox.svg') no-repeat; 
+  background-size: 5vw 5vw;
+
+  &:checked
+  {
+    width: 5vw;
+    height: 5vw;
+    background: white url('../assets/checkboxChecked.svg') no-repeat; 
+    background-size: 5vw 5vw;
+    //background-position: 50% 50%;
+  }
+}
+
+.mainContainer {
+  font-style: normal;
+  font-size: 4vw;
+  font-weight: 500;
+
+  p {
+    font-weight: 500;
+    margin-top: 1.5em;
+    margin-bottom: 0.4em;
+    color: #4b4b7c;  
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: safe;
+}
+
+.ingredientContainer {
+  width: 29.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 8px 16px rgba(75, 75, 124, 0.05);
+  border-radius: 1em; 
+  //box-sizing: border-box;
+  border: 0.7vw solid transparent;
+  margin: 1vw;
+
+  img {
+    height: 15vw;
+    margin-top: 1vw;
+  }
+}
+
+.ingredientContainerChecked {
+  border: 0.7vw solid #00A896;    
+}
+
+.title {
+  width: 85%;
+  padding-top: 2vw;
+}
+  
+.price {
+  padding-top: 2vw;
+  //padding-left: 5%;
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 1.1em;
+  margin-bottom: 7%;
+
+}

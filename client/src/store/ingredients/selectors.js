@@ -10,6 +10,6 @@ export const ingredientsCategorySauce = (state) =>
 export const ingredientsCategoryCheese = (state) =>
   state.ingredients.data.filter((item) => item.category === "cheese")
 export const ingredientsCategoryVeggies = (state) =>
-  state.ingredients.data.filter((item) => item.category === "veggies")
+  state.ingredients.data.filter((item) => item.category === "vegetables")
 export const ingredientsCategoryMeat = (state) =>
   state.ingredients.data.filter((item) => item.category === "meat")

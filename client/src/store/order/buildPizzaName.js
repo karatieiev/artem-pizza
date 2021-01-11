@@ -30,7 +30,7 @@ export const buildPizzaName = (order) => {
     return "Все в кучу"
   }
 
-  if (categories.has("veggies") && categories.size === 4) {
+  if (categories.has("vegetables") && categories.size === 4) {
     return "Вегетарианская"
   }
 

@@ -11,7 +11,7 @@ export const orderSauce = (state) =>
 export const orderCheese = (state) =>
   state.order.data.filter((item) => item.category === "cheese")
 export const orderVeggies = (state) =>
-  state.order.data.filter((item) => item.category === "veggies")
+  state.order.data.filter((item) => item.category === "vegetables")
 export const orderMeat = (state) =>
   state.order.data.filter((item) => item.category === "meat")
 export const orderDescription = (state) => state.order.description
