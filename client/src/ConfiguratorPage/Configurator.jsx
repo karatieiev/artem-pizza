@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useDispatch, useSelector, shallowEqual } from "react-redux"
@@ -53,9 +53,9 @@ export const Configurator = () => {
   const dispatch = useDispatch()
   const selection = watch()
 
-  const refRenderCount = useRef(0)
-  refRenderCount.current += 1
-  console.log(refRenderCount.current)
+  // const refRenderCount = useRef(0)
+  // refRenderCount.current += 1
+  // console.log(refRenderCount.current)
 
   dispatch(buildOrder(ingredients, selection))
 
