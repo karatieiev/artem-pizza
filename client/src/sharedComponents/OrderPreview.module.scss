@@ -1,27 +1,67 @@
 .container {
+  font-style: 400;
+  font-size: 4vw;
   padding: 3% 5% 5% 5%;
   background: white;
   box-shadow: 0px 8px 16px rgba(75, 75, 124, 0.05);
   border-radius: 1em;  
 }
 
-.orderDescription {
-  font-family: Ronded Mplus 1c;
-  font-style: normal;
-  font-size: 4vw;
+.header {
+  color: #4b4b7c;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
-  p {
-    color: black;
-    margin: 0% 5% 0% 5%;
-    font-weight: 500;
-    font-size: 1.5em;
+  .date {
+    color: #8181B1;
+  }
+}
+
+.title {
+  color: #1f1f33;
+  font-weight: 500;
+  font-size: 1.2em;
+  margin-top: 1vw;
+}
+
+.description {
+  color: #4b4b7c;
+  margin: 0.7em 0 0 0;
+  font-size: 0.9em;
+  height: 3em;
+  border-bottom: 0.5vw dashed #e1e1ed;
+  padding-bottom: 2vw;  
+}  
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 0.9em;
+  color: #4b4b7c;
+  margin-top: 4vw;
+
+  .status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 
-  div {
-    color: #4b4b7c;
-    margin: 0.7em 5% 0px 5%;
-    font-weight: normal;
-    font-size: 0.9em;
-    height: 3em;
-  }  
+  img {
+    height: 1.2em;
+  }
+  
+  .delivering {
+    color: #F3752B;
+    margin-left: 2vw;
+    font-weight: 500;
+  }
+
+  .repeat {
+    color: #009485;
+    margin-left: 2vw;
+    font-weight: 500;
+  }
 }
