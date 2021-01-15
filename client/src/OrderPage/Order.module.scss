@@ -12,7 +12,8 @@
   justify-content: center;
   img {
     margin-top: 9vw;
-    width: 22vw;
+    width: 18.9vw;
+    //margin-bottom: 1vw;
   }
 }
 
@@ -22,15 +23,19 @@
   font-weight: 500;
   text-align: center;
   font-size: 5.6vw;  
-  margin-top: 5vw;
+  margin-top: 7vw;
+  color: #1f1f33;
 }
 
 .message {
-  font-family: Rounded Mplus 1c;
   font-style: normal;
   font-weight: 400;
   text-align: center;
   font-size: 4.5vw;  
   color: #4b4b7c;
-  margin: 3vw 15vw 0 15vw;
+  margin: 2vw 15vw 0 15vw;
+}
+
+.preview {
+  margin: 5vw;
 }
