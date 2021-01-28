@@ -1,5 +1,6 @@
 import React from "react"
 import { useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
 import closeIcon from "../assets/close.svg"
 import doneIcon from "../assets/done.svg"
 import { OrderPreview } from "../sharedComponents/OrderPreview"
@@ -11,13 +12,22 @@ import {
 import styles from "./Order.module.scss"
 
 export const Order = () => {
+  const history = useHistory()
   const name = useSelector(orderName)
   const description = useSelector(orderDescription)
   const price = useSelector(orderPrice)
+  const handleImgClick = () => {
+    history.push("/")
+  }
   return (
     <>
       <div className={styles.closeIcon}>
-        <img src={closeIcon} alt="" />
+        <img
+          src={closeIcon}
+          role="presentation"
+          alt=""
+          onClick={handleImgClick}
+        />
       </div>
       <div className={styles.doneIcon}>
         <img src={doneIcon} alt="" />

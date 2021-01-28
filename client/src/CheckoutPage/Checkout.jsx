@@ -73,6 +73,10 @@ export const Checkout = () => {
     evnt.target.value = normalizeCardNumber(value)
   }
 
+  const handleBackwardClick = () => {
+    history.push("/")
+  }
+
   if (orderPostedToServer) {
     history.push("/order")
   }
@@ -88,7 +92,12 @@ export const Checkout = () => {
   return (
     <div className={styles.background}>
       <div className={styles.header}>
-        <img src={backward} alt="" />
+        <img
+          src={backward}
+          alt=""
+          role="presentation"
+          onClick={handleBackwardClick}
+        />
         <span>Оформление заказа</span>
       </div>
       <div className={styles.orderDescription}>
