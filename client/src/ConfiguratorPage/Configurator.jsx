@@ -76,6 +76,10 @@ export const Configurator = () => {
     history.push("/checkout")
   }
 
+  const goToOrderList = () => {
+    history.push("/order-list")
+  }
+
   if (pending) {
     return <div>Loading...</div>
   }
@@ -89,7 +93,7 @@ export const Configurator = () => {
       <div className={styles.header}>
         <img src={favicon} alt="" />
         <img src={artempizzaLogo} alt="" />
-        <img src={userLogo} alt="" />
+        <img src={userLogo} alt="" onClick={goToOrderList} aria-hidden="true" />
       </div>
       <PizzaImage />
       <div className={styles.orderDescription}>
