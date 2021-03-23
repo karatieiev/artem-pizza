@@ -1,6 +1,9 @@
 import React from "react"
 import { useQuery } from "react-query"
 import { getOrders } from "../api/orders"
+import styles from "./OrderList.module.scss"
+import backward from "../assets/icn_arrow-left.svg"
+import { OrderPreview } from "../sharedComponents/OrderPreview"
 
 export const OrderList = () => {
   const { isLoading, isError, error, data } = useQuery("order", getOrders)
@@ -15,17 +18,22 @@ export const OrderList = () => {
 
   return (
     <>
-      <h3>Список заказов</h3>
-      {data.map((item) =>
-        item.name !== undefined ? (
-          <>
-            <p>Заказ:</p>
-            <div>Имя: {item.name}</div>
-            <div>Адрес: {item.address}</div>
-            <hr />
-          </>
-        ) : null
-      )}
+      <div className={styles.header}>
+        <img src={backward} alt="" />
+        <span>Список заказов</span>
+      </div>
+      {data.map((item) => (
+        <div key={item.id} className={styles.card}>
+          <OrderPreview
+            orderNumber={item.id}
+            orderDate={item.ingredients[3]}
+            pizzaName={item.ingredients[0]}
+            pizzaDescription={item.ingredients[1]}
+            price={item.ingredients[2]}
+            delivering={false}
+          />
+        </div>
+      ))}
     </>
   )
 }

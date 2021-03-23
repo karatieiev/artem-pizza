@@ -1,0 +1,25 @@
+.header {
+  position: relative;
+  font-family: Rounded Mplus 1c;
+  font-style: normal;
+  font-weight: 800;   
+  margin: 3% 5% 0% 5%;
+  height: 9vw;
+  font-size: 5.2vw;
+
+  img {
+    position: absolute;
+    top: 2vw;
+    height: 4.5vw;
+    cursor: pointer;
+  }
+
+  span {
+    vertical-align: middle;
+    margin-left: 2em;
+  }
+}
+
+.card {
+  margin: 2vw;
+}
