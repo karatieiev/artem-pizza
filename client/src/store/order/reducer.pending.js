@@ -1,5 +1,5 @@
 import {
-  BUILD_ORDER,
+  SET_ORDER,
   ORDER_ERROR,
   ORDER_PENDING,
   ORDER_POSTED,
@@ -11,7 +11,7 @@ export const orderPending = (state = false, action) => {
       return true
     case ORDER_POSTED:
     case ORDER_ERROR:
-    case BUILD_ORDER:
+    case SET_ORDER:
       return false
     default:
       return state

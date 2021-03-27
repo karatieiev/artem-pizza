@@ -1,20 +1,16 @@
-export const buildOrder = (ingredients, selection) => {
-  const selectedIDs = []
-
-  Object.keys(selection).forEach((key) => {
-    switch (key) {
-      case "size":
-      case "dough":
-      case "sauce":
-        selectedIDs.push(selection[key])
-        break
-      default:
-        selection[key].forEach((id) => {
-          selectedIDs.push(id)
-        })
-        break
-    }
-  })
-
-  return ingredients.filter((item) => selectedIDs.includes(item.id))
+export const buildOrder = (order, category, id) => {
+  switch (category) {
+    case "size":
+    case "dough":
+    case "sauce":
+      return [
+        ...order.filter((item) => item.category !== category),
+        { category, id },
+      ]
+    default:
+      if (order.some((item) => item.id === id)) {
+        return order.filter((item) => item.id !== id)
+      }
+      return [...order, { category, id }]
+  }
 }
