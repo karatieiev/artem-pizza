@@ -1,5 +1,5 @@
 import {
-  BUILD_ORDER,
+  SET_ORDER,
   ORDER_ERROR,
   ORDER_PENDING,
   ORDER_POSTED,
@@ -13,7 +13,7 @@ describe("order reducers", () => {
   describe("reducer.data", () => {
     it("builds order correctly", () => {
       const reducer = orderData([], {
-        type: BUILD_ORDER,
+        type: SET_ORDER,
         ingredients: [
           { id: "1", category: "size" },
           { id: "2", category: "size" },
@@ -33,7 +33,7 @@ describe("order reducers", () => {
     })
     it("clears the error message when building order", () => {
       const reducer = orderError("no error", {
-        type: BUILD_ORDER,
+        type: SET_ORDER,
         payload: "some error",
       })
       expect(reducer).toEqual("")
@@ -55,7 +55,7 @@ describe("order reducers", () => {
       expect(reducer).toEqual(true)
     })
     it("equals false when building order", () => {
-      const reducer = orderPosted(true, { type: BUILD_ORDER })
+      const reducer = orderPosted(true, { type: SET_ORDER })
       expect(reducer).toEqual(false)
     })
   })

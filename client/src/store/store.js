@@ -9,9 +9,6 @@ import { orderData } from "./order/reducer.data"
 import { orderPending } from "./order/reducer.pending"
 import { orderError } from "./order/reducer.error"
 import { orderPosted } from "./order/reducer.posted"
-import { orderDescription } from "./order/reducer.description"
-import { orderName } from "./order/reducer.name"
-import { orderPrice } from "./order/reducer.price"
 
 const ingredients = combineReducers({
   data: ingredientsData,
@@ -24,9 +21,6 @@ const order = combineReducers({
   pending: orderPending,
   error: orderError,
   posted: orderPosted,
-  description: orderDescription,
-  name: orderName,
-  price: orderPrice,
 })
 
 export const store = createStore(

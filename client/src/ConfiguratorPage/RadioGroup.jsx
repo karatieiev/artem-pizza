@@ -1,8 +1,18 @@
 import React, { Fragment } from "react"
 import PropTypes from "prop-types"
+import { useDispatch, useSelector } from "react-redux"
 import styles from "./RadioGroup.module.scss"
+import { setOrder } from "../store/order/actions"
+import { orderData } from "../store/order/selectors"
 
-export const RadioGroup = ({ ingredients, category, caption, register }) => {
+export const RadioGroup = ({ ingredients, category, caption }) => {
+  const order = useSelector(orderData)
+  const dispatch = useDispatch()
+
+  const handleClick = (id) => {
+    dispatch(setOrder(category, id))
+  }
+
   return (
     <div className={styles.className}>
       <p>{caption}</p>
@@ -13,8 +23,8 @@ export const RadioGroup = ({ ingredients, category, caption, register }) => {
               type="radio"
               id={item.id}
               name={category}
-              ref={register}
-              value={item.id}
+              checked={order.some((i) => item.id === i.id)}
+              onChange={() => handleClick(item.id)}
             />
             <label htmlFor={item.id}>{item.name}</label>
           </Fragment>
@@ -33,5 +43,4 @@ RadioGroup.propTypes = {
   ).isRequired,
   category: PropTypes.string.isRequired,
   caption: PropTypes.string.isRequired,
-  register: PropTypes.func.isRequired,
 }

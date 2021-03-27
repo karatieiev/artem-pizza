@@ -16,7 +16,7 @@ export const buildDescription = (order) => {
     })
 
   order
-    .filter((i) => i.category === "veggies")
+    .filter((i) => i.category === "vegetables")
     .forEach((el) => {
       desc = `${desc} • ${el.name}`
     })
