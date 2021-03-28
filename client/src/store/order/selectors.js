@@ -19,7 +19,7 @@ export const orderDescription = (state) => {
 }
 
 export const orderImages = (state) => {
-  let order = []
+  const order = []
   state.order.data.forEach((orderItem) => {
     order.push(
       state.ingredients.data.find(
@@ -27,9 +27,6 @@ export const orderImages = (state) => {
       )
     )
   })
-  order = order.filter(
-    (item) => item.category !== "sauce" && item.category !== "size"
-  )
   let images = order.filter((item) => item.category === "dough")
   images = [...images, ...order.filter((item) => item.category === "cheese")]
   images = [...images, ...order.filter((item) => item.category === "meat")]
